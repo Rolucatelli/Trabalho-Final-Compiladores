@@ -1,0 +1,13 @@
+programa maior
+    inteiro a b
+inicio
+    leia a
+    leia b
+    se a > b 
+        entao escreva a
+        senao se b > a
+            entao escreva b
+            senao escreva "Os numeros sao iguais"
+            fimse
+    fimse
+fimprograma

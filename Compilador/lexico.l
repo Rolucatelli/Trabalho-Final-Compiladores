@@ -1,3 +1,14 @@
+/*+----------------------------------------------------------------+
+  |           UNIFAL - Universidade Federal de Alfenas.            |
+  |           BACHARELADO EM CIÊNCIAS DA COMPUTAÇÃO.               |
+  |                                                                |
+  |  Trabalho..:Geracao de codigo MIPS                             |
+  |  Disciplina: Compiladores                                      |
+  |  Professor.: Luiz Eduardo da Silva                             |
+  |  Aluno.....: Rodrigo Luís Gasparino Lucatelli                  |
+  |  Data......: 27/11/2024                                        |
+  +----------------------------------------------------------------+*/
+
 %{
 #include "sintatico.h"
 char atomo[100];

@@ -1,9 +1,20 @@
+/*+----------------------------------------------------------------+
+  |           UNIFAL - Universidade Federal de Alfenas.            |
+  |           BACHARELADO EM CIÊNCIAS DA COMPUTAÇÃO.               |
+  |                                                                |
+  |  Trabalho..:Geracao de codigo MIPS                             |
+  |  Disciplina: Compiladores                                      |
+  |  Professor.: Luiz Eduardo da Silva                             |
+  |  Aluno.....: Rodrigo Luís Gasparino Lucatelli                  |
+  |  Data......: 27/11/2024                                        |
+  +----------------------------------------------------------------+*/
+
 %{
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "utils.c"
-#include "lex.c"
+#include "lexico.c"
 
 int contaVar = 0;
 int rotulo = 0;
@@ -63,17 +74,19 @@ int tipo;
 
 programa 
     : cabecalho
-        { fprintf(yyout, "\tINPP\n"); }
+    { 
+        fprintf(yyout, "\tINPP\n");
+    }
      variaveis 
-        { 
-            fprintf(yyout, "\tAMEM\t%d\n", contaVar); 
-            empilha(contaVar);
-        }
-        T_INICIO lista_comandos T_FIMPROG
-        {
-            int conta = desempilha(); 
-            fprintf(yyout, "\tDMEM\t%d\n\tFIMP\n", conta); 
-        }
+    { 
+        fprintf(yyout, "\tAMEM\t%d\n", contaVar); 
+        empilha(contaVar);
+    }
+     T_INICIO lista_comandos T_FIMPROG
+    {
+        int conta = desempilha(); 
+        fprintf(yyout, "\tDMEM\t%d\n\tFIMP\n", conta); 
+    }
     ;
 
 cabecalho 
@@ -97,20 +110,19 @@ tipo
 
 lista_variaveis
     : lista_variaveis T_IDENTIF 
-        { 
-            strcpy(elemTab.id, atomo);
-            elemTab.end = contaVar++;
-            elemTab.tip = tipo;
-            insereSimbolo(elemTab);
-        }
+    { 
+        strcpy(elemTab.id, atomo);
+        elemTab.end = contaVar++;
+        elemTab.tip = tipo;
+        insereSimbolo(elemTab);
+    }
     | T_IDENTIF                 
-        { 
-            strcpy(elemTab.id, atomo);
-            elemTab.end = contaVar++;
-            elemTab.tip = tipo;
-            insereSimbolo(elemTab);
-
-        }
+    { 
+        strcpy(elemTab.id, atomo);
+        elemTab.end = contaVar++;
+        elemTab.tip = tipo;
+        insereSimbolo(elemTab);
+    }
     ;
 
 lista_comandos
@@ -129,11 +141,11 @@ comando
 
 leitura
     : T_LEIA T_IDENTIF 
-        { 
-            int pos = buscaSimbolo(atomo);
-            fprintf(yyout, "\tLEIA\n"); 
-            fprintf(yyout, "\tARZG\t%d\n", tabSimb[pos].end); 
-        }
+    { 
+        int pos = buscaSimbolo(atomo);
+        fprintf(yyout, "\tLEIA\n"); 
+        fprintf(yyout, "\tARZG\t%d\n", tabSimb[pos].end); 
+    }
     ;
 
 escrita
@@ -144,7 +156,7 @@ escrita
     }
     | T_ESCREVA T_LITERAL
     {
-        fprintf(yyout, "\tIMPC\t%s\n", atomo); //Trocar esse IMPC por algo que imprima a string
+        fprintf(yyout, "\tESCR\t%s\n", atomo);
     }
     ;
 
@@ -193,17 +205,18 @@ selecao
 
 atribuicao
     : T_IDENTIF
-        { 
-            int pos = buscaSimbolo(atomo);
-            empilha(pos);
-        }
-         T_ATRIB expressao{
-            int tipo = desempilha();
-            int pos = desempilha();
-            if(tipo != tabSimb[pos].tip)
-                yyerror("Incompatibilidade de tipos");
-            fprintf(yyout, "\tARZG\t%d\n", tabSimb[pos].end);
-         }
+    { 
+        int pos = buscaSimbolo(atomo);
+        empilha(pos);
+    }
+     T_ATRIB expressao
+    {
+        int tipo = desempilha();
+        int pos = desempilha();
+        if(tipo != tabSimb[pos].tip)
+            yyerror("Incompatibilidade de tipos");
+        fprintf(yyout, "\tARZG\t%d\n", tabSimb[pos].end);
+    }
     ;
 
 expressao
@@ -263,11 +276,11 @@ termo
 
     }
     | T_IDENTIF     
-        { 
-            int pos = buscaSimbolo(atomo);
-            fprintf(yyout, "\tCRVG\t%d\n", tabSimb[pos].end); 
-            empilha(tabSimb[pos].tip);
-        }
+    { 
+        int pos = buscaSimbolo(atomo);
+        fprintf(yyout, "\tCRVG\t%d\n", tabSimb[pos].end); 
+        empilha(tabSimb[pos].tip);
+    }
     | T_V           
     { 
         fprintf(yyout, "\tCRVG\t1\n"); 
@@ -295,7 +308,7 @@ termo
 %%
 
 int main (int argc, char *argv[]) {
-    char nameIn[100], nameOut[30], *p;
+    char nameIn[30], nameOutMvs[30], nameOutMips[30],  *p;
     if(argc < 2) {
         printf("Use:\n\t%s <arquivo>[.simples]\n\n", argv[0]);
         return 10;
@@ -308,11 +321,14 @@ int main (int argc, char *argv[]) {
 
 
     strcpy(nameIn, argv[1]);
-    strcpy(nameOut, argv[1]);
+    strcpy(nameOutMvs, argv[1]);
+    strcpy(nameOutMips, argv[1]);
     strcat(nameIn, ".simples");
-    strcat(nameOut, ".mvs");
+    strcat(nameOutMvs, ".mvs");
+    strcat(nameOutMips, ".abs");
     yyin = fopen(nameIn, "r");
-    yyout = fopen(nameOut, "w");
+    yyout = fopen(nameOutMvs, "w");
+    /* yyout = fopen(nameOutMips, "w"); */
     if (!yyin) {
         perror("Erro ao abrir o arquivo");
         return 1;

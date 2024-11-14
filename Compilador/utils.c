@@ -1,4 +1,13 @@
-
+/*+----------------------------------------------------------------+
+  |           UNIFAL - Universidade Federal de Alfenas.            |
+  |           BACHARELADO EM CIÊNCIAS DA COMPUTAÇÃO.               |
+  |                                                                |
+  |  Trabalho..:Geracao de codigo MIPS                             |
+  |  Disciplina: Compiladores                                      |
+  |  Professor.: Luiz Eduardo da Silva                             |
+  |  Aluno.....: Rodrigo Luís Gasparino Lucatelli                  |
+  |  Data......: 27/11/2024                                        |
+  +----------------------------------------------------------------+*/
 
 // Tabela de Simbolos
 
@@ -82,4 +91,17 @@ void testaTipo(int tipo1, int tipo2, int ret)
     if (t1 != tipo1 || t2 != tipo2)
         yyerror("Imcopatibilidade de tipo!");
     empilha(ret);
+}
+
+//Remove aspas de uma String
+
+void removeAspas(char* str){
+    char *src = str, *dst = str;
+    while (*src) {
+        if (*src != '"') {
+            *dst++ = *src;
+        }
+        src++;
+    }
+    *dst = '\0';
 }
