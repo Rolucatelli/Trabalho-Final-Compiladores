@@ -1,0 +1,15 @@
+programa potenciacao
+  inteiro base expoente potencia
+inicio
+  escreva "Digite a base: "
+  leia base
+  escreva "Digite o expoente: "
+  leia expoente
+  potencia <- 1
+  enquanto expoente > 0 faca
+     potencia <- potencia * base
+     expoente <- expoente - 1
+  fimenquanto
+  escreva "Potencia (base^expoente) = "
+  escreva potencia
+fimprograma

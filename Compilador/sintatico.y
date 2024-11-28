@@ -6,14 +6,13 @@
   |  Disciplina: Compiladores                                      |
   |  Professor.: Luiz Eduardo da Silva                             |
   |  Aluno.....: Rodrigo Luís Gasparino Lucatelli                  |
-  |  Data......: 27/11/2024                                        |
+  |  Data......: 05/11/2024                                        |
   +----------------------------------------------------------------+*/
 
 %{
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "utils.c"
 #include "lexico.c"
 
 int contaVar = 0;
@@ -75,17 +74,28 @@ int tipo;
 programa 
     : cabecalho
     { 
-        fprintf(yyout, "\tINPP\n");
+        // fprintf(yyout, "\tINPP\n");
+        fprintf(yyout, ".text\n");
+        fprintf(yyout, "\t.globl main\n");
     }
      variaveis 
     { 
-        fprintf(yyout, "\tAMEM\t%d\n", contaVar); 
-        empilha(contaVar);
+        // fprintf(yyout, "\tAMEM\t%d\n", contaVar); 
+        
+        // empilha(contaVar);
     }
-     T_INICIO lista_comandos T_FIMPROG
+     T_INICIO
     {
-        int conta = desempilha(); 
-        fprintf(yyout, "\tDMEM\t%d\n\tFIMP\n", conta); 
+        fprintf(yyout, "main:\tnop\n");
+    }
+    lista_comandos T_FIMPROG
+    {
+        // int conta = desempilha(); 
+        // fprintf(yyout, "\tDMEM\t%d\n\tFIMP\n", conta); 
+        fprintf(yyout, "fim:\tnop\n");
+        fprintf(yyout, "\tli $v0, 10\n");
+        fprintf(yyout, "\tli $a0, 0\n");
+        fprintf(yyout, "\tsyscall\n");
     }
     ;
 
@@ -104,8 +114,14 @@ declaracao_variaveis
     ;
 
 tipo
-    : T_INTEIRO { tipo = INT; }
-    | T_LOGICO  { tipo = LOG; }
+    : T_INTEIRO 
+    {
+        tipo = INT;
+    }
+    | T_LOGICO  
+    { 
+        tipo = LOG; 
+    }
     ;
 
 lista_variaveis
@@ -143,8 +159,10 @@ leitura
     : T_LEIA T_IDENTIF 
     { 
         int pos = buscaSimbolo(atomo);
-        fprintf(yyout, "\tLEIA\n"); 
-        fprintf(yyout, "\tARZG\t%d\n", tabSimb[pos].end); 
+    //     fprintf(yyout, "\tLEIA\n"); 
+        fprintf(yyout, "\tli $v0, 5\n");
+        fprintf(yyout, "\tsyscall\n");
+        fprintf(yyout, "\tsw $a0 %d\n", tabSimb[pos].end); 
     }
     ;
 
@@ -152,18 +170,26 @@ escrita
     : T_ESCREVA expressao
     { 
         int tipo = desempilha();
-        fprintf(yyout, "\tESCR\n"); 
+        // fprintf(yyout, "\tESCR\n");
+        fprintf(yyout, "\tla $a0, %s\n", atomo);
+        fprintf(yyout, "\tli $v0, 1\n");
+        fprintf(yyout, "\tsyscall\n"); 
     }
     | T_ESCREVA T_LITERAL
     {
-        fprintf(yyout, "\tESCR\t%s\n", atomo);
+        // fprintf(yyout, "\tESCR\t%s\n", atomo);
+        /////////////////////////////////Tem que dar um jeito de carregar a constante no lugar do atomo///////////////////
+        fprintf(yyout, "\tla $a0, %s\n", atomo);
+        fprintf(yyout, "\tli $v0, 4\n");
+        fprintf(yyout, "\tsyscall\n");
     }
     ;
 
 repeticao
     : T_ENQUANTO 
     {
-        fprintf(yyout, "L%d\tNADA\n", ++rotulo);
+        // fprintf(yyout, "L%d\tNADA\n", ++rotulo);
+        fprintf(yyout, "L%d:\tnop\n", ++rotulo);
         empilha(rotulo);
     }
      expressao T_FACA 
@@ -171,14 +197,17 @@ repeticao
         int tipo = desempilha();
         if(tipo != LOG)
             yyerror("Incompatibilidade de tipos na repeticao");
-        fprintf(yyout, "\tDSVF\tL%d\n", ++rotulo);
+        // fprintf(yyout, "\tDSVF\tL%d\n", ++rotulo);
+        fprintf(yyout, "\tbeqz $a0, L%d\n", rotulo);
         empilha(rotulo);
     }
      lista_comandos T_FIMEQNTO
     {
             int y = desempilha();
             int x = desempilha();
-            fprintf(yyout, "\tDSVS\tL%d\nL%d\tNADA\n", x, y);
+            // fprintf(yyout, "\tDSVS\tL%d\nL%d\tNADA\n", x, y);
+        fprintf(yyout, "\tj L%d\n", x);
+        fprintf(yyout, "L%d:\tnop\n", y);
     }
     ;
 
@@ -188,26 +217,29 @@ selecao
         int tipo = desempilha();
         if(tipo != LOG)
             yyerror("Incompatibilidade de tipos na selecao");
-        fprintf(yyout, "\tDSVF\tL%d\n", ++rotulo);
+        // fprintf(yyout, "\tDSVF\tL%d\n", ++rotulo);
+        fprintf(yyout, "\tbeqz $a0, L%d\n", ++rotulo);
         empilha(rotulo);
     } lista_comandos T_SENAO 
     {
         int x = desempilha();
-        fprintf(yyout, "\tDSVS\tL%d\nL%d\tNADA\n", ++rotulo, x);
+        // fprintf(yyout, "\tDSVS\tL%d\nL%d\tNADA\n", ++rotulo, x);
+        fprintf(yyout, "\tj L%d\n", ++rotulo);
+        fprintf(yyout, "L%d:\tnop\n", x);
         empilha(rotulo);
     }
     lista_comandos T_FIMSE
     {
         int x = desempilha();
-        fprintf(yyout, "L%d\tNADA\n", x);
+        fprintf(yyout, "L%d:\tnop\n", x);
     }
     ;
 
 atribuicao
     : T_IDENTIF
     { 
-        int pos = buscaSimbolo(atomo);
-        empilha(pos);
+        // int pos = buscaSimbolo(atomo);
+        // empilha(pos);
     }
      T_ATRIB expressao
     {
@@ -215,55 +247,124 @@ atribuicao
         int pos = desempilha();
         if(tipo != tabSimb[pos].tip)
             yyerror("Incompatibilidade de tipos");
-        fprintf(yyout, "\tARZG\t%d\n", tabSimb[pos].end);
+        fprintf(yyout, "\tsw $a0 %d\n", tabSimb[pos].end);
     }
     ;
 
 expressao
-    : expressao T_MAIS expressao    
+    : expressao T_MAIS 
+    {
+        fprintf(yyout, "\tsw $a0 0($sp)\n"); 
+        fprintf(yyout, "\taddiu $sp $sp -4\n"); 
+    }
+    expressao    
     {
         testaTipo(INT, INT, INT); 
-        fprintf(yyout, "\tSOMA\n"); 
+        fprintf(yyout, "\tlw $t1 4($sp)\n"); 
+        fprintf(yyout, "\taddiu $sp $sp 4\n"); 
+        fprintf(yyout, "\tadd $a0, $t1, $a0\n"); 
     }
-    | expressao T_MENOS expressao   
+    | expressao T_MENOS 
+    {
+        fprintf(yyout, "\tsw $a0 0($sp)\n"); 
+        fprintf(yyout, "\taddiu $sp $sp -4\n"); 
+    }
+     expressao   
     {
         testaTipo(INT, INT, INT); 
-        fprintf(yyout, "\tSUBT\n"); 
+        fprintf(yyout, "\tlw $t1 4($sp)\n"); 
+        fprintf(yyout, "\taddiu $sp $sp 4\n"); 
+        fprintf(yyout, "\tsub $a0, $t1, $a0\n"); 
     }
-    | expressao T_VEZES expressao   
+    | expressao T_VEZES 
+    {
+        fprintf(yyout, "\tsw $a0 0($sp)\n"); 
+        fprintf(yyout, "\taddiu $sp $sp -4\n"); 
+    }
+     expressao   
     {
         testaTipo(INT, INT, INT); 
-        fprintf(yyout, "\tMULT\n"); 
+        fprintf(yyout, "\tlw $t1 4($sp)\n"); 
+        fprintf(yyout, "\taddiu $sp $sp 4\n"); 
+        fprintf(yyout, "\tmult $t1 $a0\n"); 
+        fprintf(yyout, "\tmflo $a0\n"); 
     }
-    | expressao T_DIV expressao     
+    | expressao T_DIV 
+    {
+        fprintf(yyout, "\tsw $a0 0($sp)\n"); 
+        fprintf(yyout, "\taddiu $sp $sp -4\n"); 
+    }
+     expressao     
     {
         testaTipo(INT, INT, INT); 
-        fprintf(yyout, "\tDIVI\n"); 
+        fprintf(yyout, "\tlw $t1 4($sp)\n"); 
+        fprintf(yyout, "\taddiu $sp $sp 4\n"); 
+        fprintf(yyout, "\tdiv $t1 $a0\n"); 
+        fprintf(yyout, "\tmflo $a0\n"); 
     }
-    | expressao T_MAIOR expressao   
+    | expressao T_MAIOR 
     {
-        testaTipo(INT, INT, LOG); 
-        fprintf(yyout, "\tCMMA\n"); 
+        fprintf(yyout, "\tsw $a0 0($sp)\n"); 
+        fprintf(yyout, "\taddiu $sp $sp -4\n"); 
     }
-    | expressao T_MENOR expressao   
+    expressao   
     {
-        testaTipo(INT, INT, LOG); 
-        fprintf(yyout, "\tCMME\n"); 
+        testaTipo(INT, INT, LOG);  
+        fprintf(yyout, "\tlw $t1 4($sp)\n"); 
+        fprintf(yyout, "\taddiu $sp $sp 4\n"); 
+        fprintf(yyout, "\tslt $a0, $a0, $t1\n"); 
     }
-    | expressao T_IGUAL expressao   
+    | expressao T_MENOR 
     {
-        testaTipo(INT, INT, LOG); 
-        fprintf(yyout, "\tCMIG\n"); 
+        fprintf(yyout, "\tsw $a0 0($sp)\n"); 
+        fprintf(yyout, "\taddiu $sp $sp -4\n"); 
+    }
+    expressao   
+    {
+        testaTipo(INT, INT, LOG);   
+        fprintf(yyout, "\tlw $t1 4($sp)\n"); 
+        fprintf(yyout, "\taddiu $sp $sp 4\n"); 
+        fprintf(yyout, "\tslt $a0, $t1, $a0\n"); 
+    }
+    | expressao T_IGUAL 
+    {
+        fprintf(yyout, "\tsw $a0 0($sp)\n"); 
+        fprintf(yyout, "\taddiu $sp $sp -4\n"); 
+    }
+    expressao   
+    {
+        testaTipo(INT, INT, LOG);   
+        fprintf(yyout, "\tlw $t1 4($sp)\n"); 
+        fprintf(yyout, "\taddiu $sp $sp 4\n");
+        fprintf(yyout, "\tbeq $a0 $t1, Lx\n");
+        fprintf(yyout, "\tli $a0, 0\n"); 
+        fprintf(yyout, "\tj Ly\n");
+        fprintf(yyout, "Lx:\tli $a0, 1\n");
+        fprintf(yyout, "Ly:\tnop\n");   
     }
     | expressao T_E expressao       
     {
         testaTipo(LOG, LOG, LOG); 
-        fprintf(yyout, "\tCONJ\n"); 
+        fprintf(yyout, "\tlw $t1 4($sp)\n"); 
+        fprintf(yyout, "\taddiu $sp $sp 4\n");
+        fprintf(yyout, "\tbeqz $a0 Lx\n");
+        fprintf(yyout, "\tbeqz $t1 Lx\n");
+        fprintf(yyout, "\tli $a0, 1\n"); 
+        fprintf(yyout, "\tj Ly\n");
+        fprintf(yyout, "Lx:\tli $a0, 0\n");
+        fprintf(yyout, "Ly:\tnop\n");  
     }
     | expressao T_OU expressao      
     {
         testaTipo(LOG, LOG, LOG); 
-        fprintf(yyout, "\tDISJ\n"); 
+        fprintf(yyout, "\tlw $t1 4($sp)\n"); 
+        fprintf(yyout, "\taddiu $sp $sp 4\n");
+        fprintf(yyout, "\tbnez $a0 Lx\n");
+        fprintf(yyout, "\tbnez $t1 Lx\n");
+        fprintf(yyout, "\tli $a0, 1\n"); 
+        fprintf(yyout, "\tj Ly\n");
+        fprintf(yyout, "Lx:\tli $a0, 0\n");
+        fprintf(yyout, "Ly:\tnop\n"); 
     }
     | termo
     ;
@@ -271,24 +372,24 @@ expressao
 termo
     : T_NUMERO      
     { 
-        fprintf(yyout, "\tCRCT\t%s\n", atomo); 
+        fprintf(yyout, "\tli $a0 %s\n", atomo); 
         empilha(INT);
 
     }
     | T_IDENTIF     
     { 
         int pos = buscaSimbolo(atomo);
-        fprintf(yyout, "\tCRVG\t%d\n", tabSimb[pos].end); 
+        fprintf(yyout, "\tlw $a0 %d\n", tabSimb[pos].end); 
         empilha(tabSimb[pos].tip);
     }
     | T_V           
     { 
-        fprintf(yyout, "\tCRVG\t1\n"); 
+        fprintf(yyout, "\tlw $a0 1\n"); 
         empilha(LOG);
     }
     | T_F           
     {
-        fprintf(yyout, "\tCRVG\t0\n");
+        fprintf(yyout, "\tlw $a0 0\n");
         empilha(LOG);
     }
     | T_NAO termo   
@@ -296,7 +397,14 @@ termo
         int x = desempilha();
         if(x != LOG)
             yyerror("Incompatibilidade de tipos");
-        fprintf(yyout, "\tNEGA\n");
+        // fprintf(yyout, "\tNEGA\n");
+        fprintf(yyout, "\tlw $t1 4($sp)\n"); 
+        fprintf(yyout, "\taddiu $sp $sp 4\n");
+        fprintf(yyout, "\tbeqz $a0 Lx\n");
+        fprintf(yyout, "\tli $a0, 0\n"); 
+        fprintf(yyout, "\tj Ly\n");
+        fprintf(yyout, "Lx:\tli $a0, 1\n");
+        fprintf(yyout, "Ly:\tnop\n"); 
         empilha(LOG);
     }
     | T_ABRE expressao T_FECHA
@@ -328,7 +436,7 @@ int main (int argc, char *argv[]) {
     strcat(nameOutMips, ".abs");
     yyin = fopen(nameIn, "r");
     yyout = fopen(nameOutMvs, "w");
-    /* yyout = fopen(nameOutMips, "w"); */
+    yyout = fopen(nameOutMips, "w");
     if (!yyin) {
         perror("Erro ao abrir o arquivo");
         return 1;

@@ -1,0 +1,7 @@
+programa teste
+   inteiro A B C D
+inicio
+   leia C
+   leia B
+   escreva 10 * (C + B)
+fimprograma

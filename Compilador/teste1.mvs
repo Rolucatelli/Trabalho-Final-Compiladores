@@ -20,7 +20,7 @@ L1	NADA
 	ESCR
 	DSVS	L4
 L3	NADA
-	ESCR	"Os numeros sao iguais"
+	ESCR	"Sao iguais"
 L4	NADA
 L2	NADA
 	DMEM	2

@@ -1,0 +1,9 @@
+programa repete
+   inteiro A 
+inicio 
+   A <- 1
+   enquanto A < 10 faca
+      escreva A 
+      A <- A + 1
+   fimenquanto
+fimprograma

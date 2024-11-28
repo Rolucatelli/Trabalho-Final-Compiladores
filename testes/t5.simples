@@ -1,0 +1,14 @@
+programa mdc
+   inteiro num1 num2
+   logico X
+inicio 
+   leia num1
+   leia num2
+   enquanto nao(num1 = num2) faca
+      se num1 > num2 
+         entao num1 <- num1 - num2
+         senao num2 <- num2 - num1
+      fimse
+   fimenquanto
+   escreva num1
+fimprograma

@@ -1,0 +1,10 @@
+programa selecao
+  inteiro A B
+inicio
+  leia A 
+  leia B 
+  se A > B
+     entao escreva A 
+     senao escreva B
+  fimse
+fimprograma

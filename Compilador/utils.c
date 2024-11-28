@@ -6,10 +6,13 @@
   |  Disciplina: Compiladores                                      |
   |  Professor.: Luiz Eduardo da Silva                             |
   |  Aluno.....: Rodrigo Luís Gasparino Lucatelli                  |
-  |  Data......: 27/11/2024                                        |
+  |  Data......: 05/11/2024                                        |
   +----------------------------------------------------------------+*/
 
 // Tabela de Simbolos
+#include "sintatico.y"
+
+int yyerror(char *);
 
 enum
 {
@@ -104,4 +107,15 @@ void removeAspas(char* str){
         src++;
     }
     *dst = '\0';
+}
+
+
+
+void armazenaVar(int contaVar){
+
+}
+
+void escreveVar(){
+    fprintf(yyout, ".data\n");
+    fprintf(yyout, "sla");
 }

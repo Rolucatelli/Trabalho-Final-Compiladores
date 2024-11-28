@@ -7,7 +7,7 @@ inicio
         entao escreva a
         senao se b > a
             entao escreva b
-            senao escreva "Os numeros sao iguais"
+            senao escreva "Sao iguais"
             fimse
     fimse
 fimprograma
