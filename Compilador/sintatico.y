@@ -77,6 +77,7 @@ programa
         // fprintf(yyout, "\tINPP\n");
         fprintf(yyout, ".text\n");
         fprintf(yyout, "\t.globl main\n");
+        iniciaTabelaVariaveis()
     }
      variaveis 
     { 
@@ -131,6 +132,7 @@ lista_variaveis
         elemTab.end = contaVar++;
         elemTab.tip = tipo;
         insereSimbolo(elemTab);
+        armazenaVar(elemTab, null);
     }
     | T_IDENTIF                 
     { 
@@ -138,6 +140,7 @@ lista_variaveis
         elemTab.end = contaVar++;
         elemTab.tip = tipo;
         insereSimbolo(elemTab);
+        armazenaVar(elemTab, null);
     }
     ;
 
@@ -179,9 +182,12 @@ escrita
     {
         // fprintf(yyout, "\tESCR\t%s\n", atomo);
         /////////////////////////////////Tem que dar um jeito de carregar a constante no lugar do atomo///////////////////
+        // TODO: Implementar a escrita de literais e o nome delas
         fprintf(yyout, "\tla $a0, %s\n", atomo);
         fprintf(yyout, "\tli $v0, 4\n");
         fprintf(yyout, "\tsyscall\n");
+        
+        armazenaVar(elemTab, atomo);
     }
     ;
 

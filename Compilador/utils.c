@@ -109,13 +109,92 @@ void removeAspas(char* str){
     *dst = '\0';
 }
 
+// Armazenamento de variáveis para o .data
+
+struct data
+{
+    char[50] nome; 
+    char[50] tipo;
+    char[255] valor;
+} tabelaVariaveis[100], constante;
+
+int posTabVar = 0;
+int numConstante = 0;
 
 
-void armazenaVar(int contaVar){
+void iniciaTabelaVariaveis(){
+    struct data espaco, enter;
+    strcpy(espaco.nome, "_esp");
+    strcpy(espaco.tipo, ".asciiz");
+    strcpy(espaco.valor, "\" \"");
+    strcpy(enter.nome, "_ent");
+    strcpy(enter.tipo, ".asciiz");
+    strcpy(enter.valor, "\"\n\"");
+
+    tabelaVariaveis[0] = espaco;
+    tabelaVariaveis[1] = enter;
+    posTabVar = 2;
+}
+
+
+void armazenaVar(struct elemTabSimbolos var, char *valor)
+{
+    struct data newVar;
+   
+    if (var.tip >= 2)
+    {
+        // É uma String
+        char tempConst[10] = "_const";
+        char charConst[3] = ""
+        strcat(tempConst, itoa(numConstante++, charConst))
+        strcpy(newVar.nome, tempConst);
+        strcpy(newVar.tipo, ".asciiz");
+        char tmp[280] = "\"";
+        strcat(tmp, valor)
+        strcat(tmp, "\"")
+        strcpy(newVar.valor, tmp);
+
+    } else {
+        // É lógico ou inteiro
+        strcpy(newVar.nome, var.id);
+        strcpy(newVar.tipo, ".word");
+        strcpy(newVar.valor, "1");
+    }
+
+    tabelaVariaveis[posTabVar++] = newVar;
 
 }
 
-void escreveVar(){
-    fprintf(yyout, ".data\n");
-    fprintf(yyout, "sla");
+void dumpTabelaVar(){
+    for (int i = 0; i < posTabVar ; i++)
+        fprintf(yyout, "%s: %s %s", posTabVar[i].nome, posTabVar[i].tipo, posTabVar[i].valor);
+    
+    
+}
+
+char *itoa ( int value, char * str )
+{
+    char temp;
+    int i =0;
+    while (value > 0) {
+        int digito = value % 10;
+
+        str[i] = digito + '0';
+        value /= 10;
+        i++;
+
+    }
+   i = 0;
+   int j = strlen(str) - 1;
+
+   while (i < j) {
+      temp = str[i];
+      str[i] = str[j];
+      str[j] = temp;
+      i++;
+      j--;
+   }
+    return str;
+
+
 }
