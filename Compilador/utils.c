@@ -10,7 +10,6 @@
   +----------------------------------------------------------------+*/
 
 // Tabela de Simbolos
-#include "sintatico.y"
 
 int yyerror(char *);
 
@@ -116,17 +115,16 @@ void removeAspas(char *str)
 
 struct data
 {
-    char[50] nome;
-    char[50] tipo;
-    char[255] valor;
-} tabelaVariaveis[100], constante;
+    char nome[50];
+    char tipo[50];
+    char valor[255];
+} tabelaVariaveis[100], constante, espaco, enter;
 
 int posTabVar = 0;
 int numConstante = 0;
 
 void iniciaTabelaVariaveis()
 {
-    struct data espaco, enter;
     strcpy(espaco.nome, "_esp");
     strcpy(espaco.tipo, ".asciiz");
     strcpy(espaco.valor, "\" \"");
@@ -170,7 +168,8 @@ char *armazenaVar(struct elemTabSimbolos var, char *valor)
 
 void dumpTabelaVar()
 {
-    fprintf(yyout, ".data\n") for (int i = 0; i < posTabVar; i++) for (int i = 0; i < posTabVar; i++)
+    fprintf(yyout, ".data\n");
+    for (int i = 0; i < posTabVar; i++) for (int i = 0; i < posTabVar; i++)
         fprintf(yyout, "\t%s: %s %s", posTabVar[i].nome, posTabVar[i].tipo, posTabVar[i].valor);
 }
 

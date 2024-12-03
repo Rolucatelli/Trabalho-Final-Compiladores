@@ -11,7 +11,6 @@
 
 %{
 #include "sintatico.h"
-#include "utils.c"
 char atomo[100];
 int yyerror(char *);
 int numLinha = 1;

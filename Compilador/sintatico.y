@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "lexico.c"
+#include "utils.c"
 
 int contaVar = 0;
 int rotulo = 0;

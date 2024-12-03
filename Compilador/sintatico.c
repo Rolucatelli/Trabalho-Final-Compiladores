@@ -72,14 +72,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "lexico.l"
+#include "lexico.c"
+#include "utils.c"
 
 int contaVar = 0;
 int rotulo = 0;
 int tipo;
 
 
-#line 83 "sintatico.c"
+#line 84 "sintatico.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -561,12 +562,12 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,    76,    76,    83,    89,    75,   105,   109,   110,   114,
-     115,   119,   123,   130,   138,   149,   150,   151,   155,   156,
-     157,   158,   159,   163,   174,   182,   195,   201,   194,   221,
-     229,   220,   245,   244,   261,   260,   273,   272,   285,   284,
-     298,   297,   311,   310,   323,   322,   335,   334,   350,   362,
-     374,   378,   384,   390,   395,   400,   415
+       0,    77,    77,    84,    90,    76,   106,   110,   111,   115,
+     116,   120,   124,   131,   139,   150,   151,   152,   156,   157,
+     158,   159,   160,   164,   175,   183,   196,   202,   195,   222,
+     230,   221,   246,   245,   262,   261,   274,   273,   286,   285,
+     299,   298,   312,   311,   324,   323,   336,   335,   351,   363,
+     375,   379,   385,   391,   396,   401,   416
 };
 #endif
 
@@ -1198,36 +1199,36 @@ yyreduce:
   switch (yyn)
     {
   case 2: /* $@1: %empty  */
-#line 76 "sintatico.y"
+#line 77 "sintatico.y"
     { 
         // fprintf(yyout, "\tINPP\n");
         fprintf(yyout, ".text\n");
         fprintf(yyout, "\t.globl main\n");
         iniciaTabelaVariaveis();
     }
-#line 1209 "sintatico.c"
+#line 1210 "sintatico.c"
     break;
 
   case 3: /* $@2: %empty  */
-#line 83 "sintatico.y"
+#line 84 "sintatico.y"
     { 
         // fprintf(yyout, "\tAMEM\t%d\n", contaVar); 
         
         // empilha(contaVar);
     }
-#line 1219 "sintatico.c"
+#line 1220 "sintatico.c"
     break;
 
   case 4: /* $@3: %empty  */
-#line 89 "sintatico.y"
+#line 90 "sintatico.y"
     {
         fprintf(yyout, "main:\tnop\n");
     }
-#line 1227 "sintatico.c"
+#line 1228 "sintatico.c"
     break;
 
   case 5: /* programa: cabecalho $@1 variaveis $@2 T_INICIO $@3 lista_comandos T_FIMPROG  */
-#line 93 "sintatico.y"
+#line 94 "sintatico.y"
     {
         // int conta = desempilha(); 
         // fprintf(yyout, "\tDMEM\t%d\n\tFIMP\n", conta); 
@@ -1237,27 +1238,27 @@ yyreduce:
         fprintf(yyout, "\tsyscall\n");
         dumpTabelaVar();
     }
-#line 1241 "sintatico.c"
+#line 1242 "sintatico.c"
     break;
 
   case 11: /* tipo: T_INTEIRO  */
-#line 120 "sintatico.y"
+#line 121 "sintatico.y"
     {
         tipo = INT;
     }
-#line 1249 "sintatico.c"
+#line 1250 "sintatico.c"
     break;
 
   case 12: /* tipo: T_LOGICO  */
-#line 124 "sintatico.y"
+#line 125 "sintatico.y"
     { 
         tipo = LOG; 
     }
-#line 1257 "sintatico.c"
+#line 1258 "sintatico.c"
     break;
 
   case 13: /* lista_variaveis: lista_variaveis T_IDENTIF  */
-#line 131 "sintatico.y"
+#line 132 "sintatico.y"
     { 
         strcpy(elemTab.id, atomo);
         elemTab.end = contaVar++;
@@ -1265,11 +1266,11 @@ yyreduce:
         insereSimbolo(elemTab);
         armazenaVar(elemTab, null);
     }
-#line 1269 "sintatico.c"
+#line 1270 "sintatico.c"
     break;
 
   case 14: /* lista_variaveis: T_IDENTIF  */
-#line 139 "sintatico.y"
+#line 140 "sintatico.y"
     { 
         strcpy(elemTab.id, atomo);
         elemTab.end = contaVar++;
@@ -1277,11 +1278,11 @@ yyreduce:
         insereSimbolo(elemTab);
         armazenaVar(elemTab, null);
     }
-#line 1281 "sintatico.c"
+#line 1282 "sintatico.c"
     break;
 
   case 23: /* leitura: T_LEIA T_IDENTIF  */
-#line 164 "sintatico.y"
+#line 165 "sintatico.y"
     { 
         int pos = buscaSimbolo(atomo);
     //     fprintf(yyout, "\tLEIA\n"); 
@@ -1289,11 +1290,11 @@ yyreduce:
         fprintf(yyout, "\tsyscall\n");
         fprintf(yyout, "\tsw $a0 %d\n", tabSimb[pos].end); 
     }
-#line 1293 "sintatico.c"
+#line 1294 "sintatico.c"
     break;
 
   case 24: /* escrita: T_ESCREVA expressao  */
-#line 175 "sintatico.y"
+#line 176 "sintatico.y"
     { 
         int tipo = desempilha();
         // fprintf(yyout, "\tESCR\n");
@@ -1301,11 +1302,11 @@ yyreduce:
         fprintf(yyout, "\tli $v0, 1\n");
         fprintf(yyout, "\tsyscall\n"); 
     }
-#line 1305 "sintatico.c"
+#line 1306 "sintatico.c"
     break;
 
   case 25: /* escrita: T_ESCREVA T_LITERAL  */
-#line 183 "sintatico.y"
+#line 184 "sintatico.y"
     {
         // fprintf(yyout, "\tESCR\t%s\n", atomo);
         
@@ -1314,21 +1315,21 @@ yyreduce:
         fprintf(yyout, "\tli $v0, 4\n");
         fprintf(yyout, "\tsyscall\n");
     }
-#line 1318 "sintatico.c"
+#line 1319 "sintatico.c"
     break;
 
   case 26: /* $@4: %empty  */
-#line 195 "sintatico.y"
+#line 196 "sintatico.y"
     {
         // fprintf(yyout, "L%d\tNADA\n", ++rotulo);
         fprintf(yyout, "L%d:\tnop\n", ++rotulo);
         empilha(rotulo);
     }
-#line 1328 "sintatico.c"
+#line 1329 "sintatico.c"
     break;
 
   case 27: /* $@5: %empty  */
-#line 201 "sintatico.y"
+#line 202 "sintatico.y"
     {
         int tipo = desempilha();
         if(tipo != LOG)
@@ -1337,11 +1338,11 @@ yyreduce:
         fprintf(yyout, "\tbeqz $a0, L%d\n", rotulo);
         empilha(rotulo);
     }
-#line 1341 "sintatico.c"
+#line 1342 "sintatico.c"
     break;
 
   case 28: /* repeticao: T_ENQUANTO $@4 expressao T_FACA $@5 lista_comandos T_FIMEQNTO  */
-#line 210 "sintatico.y"
+#line 211 "sintatico.y"
     {
             int y = desempilha();
             int x = desempilha();
@@ -1349,11 +1350,11 @@ yyreduce:
         fprintf(yyout, "\tj L%d\n", x);
         fprintf(yyout, "L%d:\tnop\n", y);
     }
-#line 1353 "sintatico.c"
+#line 1354 "sintatico.c"
     break;
 
   case 29: /* $@6: %empty  */
-#line 221 "sintatico.y"
+#line 222 "sintatico.y"
     {
         int tipo = desempilha();
         if(tipo != LOG)
@@ -1362,11 +1363,11 @@ yyreduce:
         fprintf(yyout, "\tbeqz $a0, L%d\n", ++rotulo);
         empilha(rotulo);
     }
-#line 1366 "sintatico.c"
+#line 1367 "sintatico.c"
     break;
 
   case 30: /* $@7: %empty  */
-#line 229 "sintatico.y"
+#line 230 "sintatico.y"
     {
         int x = desempilha();
         // fprintf(yyout, "\tDSVS\tL%d\nL%d\tNADA\n", ++rotulo, x);
@@ -1374,29 +1375,29 @@ yyreduce:
         fprintf(yyout, "L%d:\tnop\n", x);
         empilha(rotulo);
     }
-#line 1378 "sintatico.c"
+#line 1379 "sintatico.c"
     break;
 
   case 31: /* selecao: T_SE expressao T_ENTAO $@6 lista_comandos T_SENAO $@7 lista_comandos T_FIMSE  */
-#line 237 "sintatico.y"
+#line 238 "sintatico.y"
     {
         int x = desempilha();
         fprintf(yyout, "L%d:\tnop\n", x);
     }
-#line 1387 "sintatico.c"
+#line 1388 "sintatico.c"
     break;
 
   case 32: /* $@8: %empty  */
-#line 245 "sintatico.y"
+#line 246 "sintatico.y"
     { 
-        // int pos = buscaSimbolo(atomo);
-        // empilha(pos);
+        int pos = buscaSimbolo(atomo);
+        empilha(pos);
     }
-#line 1396 "sintatico.c"
+#line 1397 "sintatico.c"
     break;
 
   case 33: /* atribuicao: T_IDENTIF $@8 T_ATRIB expressao  */
-#line 250 "sintatico.y"
+#line 251 "sintatico.y"
     {
         int tipo = desempilha();
         int pos = desempilha();
@@ -1404,60 +1405,60 @@ yyreduce:
             yyerror("Incompatibilidade de tipos");
         fprintf(yyout, "\tsw $a0 %d\n", tabSimb[pos].end);
     }
-#line 1408 "sintatico.c"
+#line 1409 "sintatico.c"
     break;
 
   case 34: /* $@9: %empty  */
-#line 261 "sintatico.y"
+#line 262 "sintatico.y"
     {
         fprintf(yyout, "\tsw $a0 0($sp)\n"); 
         fprintf(yyout, "\taddiu $sp $sp -4\n"); 
     }
-#line 1417 "sintatico.c"
+#line 1418 "sintatico.c"
     break;
 
   case 35: /* expressao: expressao T_MAIS $@9 expressao  */
-#line 266 "sintatico.y"
+#line 267 "sintatico.y"
     {
         testaTipo(INT, INT, INT); 
         fprintf(yyout, "\tlw $t1 4($sp)\n"); 
         fprintf(yyout, "\taddiu $sp $sp 4\n"); 
         fprintf(yyout, "\tadd $a0, $t1, $a0\n"); 
     }
-#line 1428 "sintatico.c"
+#line 1429 "sintatico.c"
     break;
 
   case 36: /* $@10: %empty  */
-#line 273 "sintatico.y"
+#line 274 "sintatico.y"
     {
         fprintf(yyout, "\tsw $a0 0($sp)\n"); 
         fprintf(yyout, "\taddiu $sp $sp -4\n"); 
     }
-#line 1437 "sintatico.c"
+#line 1438 "sintatico.c"
     break;
 
   case 37: /* expressao: expressao T_MENOS $@10 expressao  */
-#line 278 "sintatico.y"
+#line 279 "sintatico.y"
     {
         testaTipo(INT, INT, INT); 
         fprintf(yyout, "\tlw $t1 4($sp)\n"); 
         fprintf(yyout, "\taddiu $sp $sp 4\n"); 
         fprintf(yyout, "\tsub $a0, $t1, $a0\n"); 
     }
-#line 1448 "sintatico.c"
+#line 1449 "sintatico.c"
     break;
 
   case 38: /* $@11: %empty  */
-#line 285 "sintatico.y"
+#line 286 "sintatico.y"
     {
         fprintf(yyout, "\tsw $a0 0($sp)\n"); 
         fprintf(yyout, "\taddiu $sp $sp -4\n"); 
     }
-#line 1457 "sintatico.c"
+#line 1458 "sintatico.c"
     break;
 
   case 39: /* expressao: expressao T_VEZES $@11 expressao  */
-#line 290 "sintatico.y"
+#line 291 "sintatico.y"
     {
         testaTipo(INT, INT, INT); 
         fprintf(yyout, "\tlw $t1 4($sp)\n"); 
@@ -1465,20 +1466,20 @@ yyreduce:
         fprintf(yyout, "\tmult $t1 $a0\n"); 
         fprintf(yyout, "\tmflo $a0\n"); 
     }
-#line 1469 "sintatico.c"
+#line 1470 "sintatico.c"
     break;
 
   case 40: /* $@12: %empty  */
-#line 298 "sintatico.y"
+#line 299 "sintatico.y"
     {
         fprintf(yyout, "\tsw $a0 0($sp)\n"); 
         fprintf(yyout, "\taddiu $sp $sp -4\n"); 
     }
-#line 1478 "sintatico.c"
+#line 1479 "sintatico.c"
     break;
 
   case 41: /* expressao: expressao T_DIV $@12 expressao  */
-#line 303 "sintatico.y"
+#line 304 "sintatico.y"
     {
         testaTipo(INT, INT, INT); 
         fprintf(yyout, "\tlw $t1 4($sp)\n"); 
@@ -1486,145 +1487,145 @@ yyreduce:
         fprintf(yyout, "\tdiv $t1 $a0\n"); 
         fprintf(yyout, "\tmflo $a0\n"); 
     }
-#line 1490 "sintatico.c"
+#line 1491 "sintatico.c"
     break;
 
   case 42: /* $@13: %empty  */
-#line 311 "sintatico.y"
+#line 312 "sintatico.y"
     {
         fprintf(yyout, "\tsw $a0 0($sp)\n"); 
         fprintf(yyout, "\taddiu $sp $sp -4\n"); 
     }
-#line 1499 "sintatico.c"
+#line 1500 "sintatico.c"
     break;
 
   case 43: /* expressao: expressao T_MAIOR $@13 expressao  */
-#line 316 "sintatico.y"
+#line 317 "sintatico.y"
     {
         testaTipo(INT, INT, LOG);  
         fprintf(yyout, "\tlw $t1 4($sp)\n"); 
         fprintf(yyout, "\taddiu $sp $sp 4\n"); 
         fprintf(yyout, "\tslt $a0, $a0, $t1\n"); 
     }
-#line 1510 "sintatico.c"
+#line 1511 "sintatico.c"
     break;
 
   case 44: /* $@14: %empty  */
-#line 323 "sintatico.y"
+#line 324 "sintatico.y"
     {
         fprintf(yyout, "\tsw $a0 0($sp)\n"); 
         fprintf(yyout, "\taddiu $sp $sp -4\n"); 
     }
-#line 1519 "sintatico.c"
+#line 1520 "sintatico.c"
     break;
 
   case 45: /* expressao: expressao T_MENOR $@14 expressao  */
-#line 328 "sintatico.y"
+#line 329 "sintatico.y"
     {
         testaTipo(INT, INT, LOG);   
         fprintf(yyout, "\tlw $t1 4($sp)\n"); 
         fprintf(yyout, "\taddiu $sp $sp 4\n"); 
         fprintf(yyout, "\tslt $a0, $t1, $a0\n"); 
     }
-#line 1530 "sintatico.c"
+#line 1531 "sintatico.c"
     break;
 
   case 46: /* $@15: %empty  */
-#line 335 "sintatico.y"
+#line 336 "sintatico.y"
     {
         fprintf(yyout, "\tsw $a0 0($sp)\n"); 
         fprintf(yyout, "\taddiu $sp $sp -4\n"); 
     }
-#line 1539 "sintatico.c"
+#line 1540 "sintatico.c"
     break;
 
   case 47: /* expressao: expressao T_IGUAL $@15 expressao  */
-#line 340 "sintatico.y"
+#line 341 "sintatico.y"
     {
         testaTipo(INT, INT, LOG);   
         fprintf(yyout, "\tlw $t1 4($sp)\n"); 
         fprintf(yyout, "\taddiu $sp $sp 4\n");
-        fprintf(yyout, "\tbeq $a0 $t1, Lx\n");
+        fprintf(yyout, "\tbeq $a0 $t1, L%d\n", ++rotulo);
         fprintf(yyout, "\tli $a0, 0\n"); 
-        fprintf(yyout, "\tj Ly\n");
-        fprintf(yyout, "Lx:\tli $a0, 1\n");
-        fprintf(yyout, "Ly:\tnop\n");   
+        fprintf(yyout, "\tj L%d\n", ++rotulo);
+        fprintf(yyout, "L%d:\tli $a0, 1\n", rotulo - 1);
+        fprintf(yyout, "L%d:\tnop\n", rotulo);   
     }
-#line 1554 "sintatico.c"
+#line 1555 "sintatico.c"
     break;
 
   case 48: /* expressao: expressao T_E expressao  */
-#line 351 "sintatico.y"
+#line 352 "sintatico.y"
     {
         testaTipo(LOG, LOG, LOG); 
         fprintf(yyout, "\tlw $t1 4($sp)\n"); 
         fprintf(yyout, "\taddiu $sp $sp 4\n");
-        fprintf(yyout, "\tbeqz $a0 Lx\n");
-        fprintf(yyout, "\tbeqz $t1 Lx\n");
+        fprintf(yyout, "\tbeqz $a0 L%d\n", ++rotulo);
+        fprintf(yyout, "\tbeqz $t1 L%d\n", rotulo);
         fprintf(yyout, "\tli $a0, 1\n"); 
-        fprintf(yyout, "\tj Ly\n");
-        fprintf(yyout, "Lx:\tli $a0, 0\n");
-        fprintf(yyout, "Ly:\tnop\n");  
+        fprintf(yyout, "\tj L%d\n", ++rotulo);
+        fprintf(yyout, "L%d:\tli $a0, 0\n", rotulo - 1);
+        fprintf(yyout, "L%d:\tnop\n", rotulo);  
     }
-#line 1570 "sintatico.c"
+#line 1571 "sintatico.c"
     break;
 
   case 49: /* expressao: expressao T_OU expressao  */
-#line 363 "sintatico.y"
+#line 364 "sintatico.y"
     {
         testaTipo(LOG, LOG, LOG); 
         fprintf(yyout, "\tlw $t1 4($sp)\n"); 
         fprintf(yyout, "\taddiu $sp $sp 4\n");
-        fprintf(yyout, "\tbnez $a0 Lx\n");
-        fprintf(yyout, "\tbnez $t1 Lx\n");
+        fprintf(yyout, "\tbnez $a0 L%d\n", ++rotulo);
+        fprintf(yyout, "\tbnez $t1 L%d\n", rotulo);
         fprintf(yyout, "\tli $a0, 1\n"); 
-        fprintf(yyout, "\tj Ly\n");
-        fprintf(yyout, "Lx:\tli $a0, 0\n");
-        fprintf(yyout, "Ly:\tnop\n"); 
+        fprintf(yyout, "\tj L%d\n", ++rotulo);
+        fprintf(yyout, "L%d:\tli $a0, 0\n", rotulo - 1);
+        fprintf(yyout, "L%d:\tnop\n", rotulo); 
     }
-#line 1586 "sintatico.c"
+#line 1587 "sintatico.c"
     break;
 
   case 51: /* termo: T_NUMERO  */
-#line 379 "sintatico.y"
+#line 380 "sintatico.y"
     { 
         fprintf(yyout, "\tli $a0 %s\n", atomo); 
         empilha(INT);
 
     }
-#line 1596 "sintatico.c"
+#line 1597 "sintatico.c"
     break;
 
   case 52: /* termo: T_IDENTIF  */
-#line 385 "sintatico.y"
+#line 386 "sintatico.y"
     { 
         int pos = buscaSimbolo(atomo);
         fprintf(yyout, "\tlw $a0 %d\n", tabSimb[pos].end); 
         empilha(tabSimb[pos].tip);
     }
-#line 1606 "sintatico.c"
+#line 1607 "sintatico.c"
     break;
 
   case 53: /* termo: T_V  */
-#line 391 "sintatico.y"
+#line 392 "sintatico.y"
     { 
         fprintf(yyout, "\tlw $a0 1\n"); 
         empilha(LOG);
     }
-#line 1615 "sintatico.c"
+#line 1616 "sintatico.c"
     break;
 
   case 54: /* termo: T_F  */
-#line 396 "sintatico.y"
+#line 397 "sintatico.y"
     {
         fprintf(yyout, "\tlw $a0 0\n");
         empilha(LOG);
     }
-#line 1624 "sintatico.c"
+#line 1625 "sintatico.c"
     break;
 
   case 55: /* termo: T_NAO termo  */
-#line 401 "sintatico.y"
+#line 402 "sintatico.y"
     {
         int x = desempilha();
         if(x != LOG)
@@ -1639,11 +1640,11 @@ yyreduce:
         fprintf(yyout, "Ly:\tnop\n"); 
         empilha(LOG);
     }
-#line 1643 "sintatico.c"
+#line 1644 "sintatico.c"
     break;
 
 
-#line 1647 "sintatico.c"
+#line 1648 "sintatico.c"
 
       default: break;
     }
@@ -1836,7 +1837,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 421 "sintatico.y"
+#line 422 "sintatico.y"
 
 
 int main (int argc, char *argv[]) {
