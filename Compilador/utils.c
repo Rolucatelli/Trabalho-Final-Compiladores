@@ -122,28 +122,28 @@ struct data
     char nome[50];
     char tipo[50];
     char valor[255];
-} tabelaVariaveis[100], constante, espaco, enter, newVar;
+} *tabelaVariaveis, constante, espaco, enter, newVar;
 
 int posTabVar = 0;
 int numConstante = 0;
 
 void iniciaTabelaVariaveis()
 {
+    tabelaVariaveis = malloc(sizeof(struct data) * 100);
     strcpy(espaco.nome, "_esp");
     strcpy(espaco.tipo, ".asciiz");
     strcpy(espaco.valor, "\" \"");
     strcpy(enter.nome, "_ent");
     strcpy(enter.tipo, ".asciiz");
-    strcpy(enter.valor, "\"\n\"");
+    strcpy(enter.valor, "\"\\n\"");
 
     tabelaVariaveis[posTabVar++] = espaco;
     tabelaVariaveis[posTabVar++] = enter;
-    
 }
 
 char *armazenaVar(struct elemTabSimbolos var, char *valor)
 {
-
+    printf("\n\tvar.tip:%d\n", var.tip);
     if (var.tip >= 2)
     {
         // É uma String
@@ -153,33 +153,44 @@ char *armazenaVar(struct elemTabSimbolos var, char *valor)
         strcat(tempConst, tam);
         strcpy(newVar.nome, tempConst);
         strcpy(newVar.tipo, ".asciiz");
-        char tmp[280] = "\"";
-        strcat(tmp, valor);
-        strcat(tmp, "\"");
-        strcpy(newVar.valor, tmp);
+        strcpy(newVar.valor, valor);
     }
     else
     {
         // É lógico ou inteiro
+        // printf("\n\tvar.id:%s\n", var.id);
         strcpy(newVar.nome, var.id);
+        // printf("\n\tnewVar.id:%s\n", newVar.nome);
         strcpy(newVar.tipo, ".word");
+        // printf("\n\tnewVar.tipo:%s\n", newVar.tipo);
         strcpy(newVar.valor, "1");
+        // printf("\n\tnewVar.valor:%s\n", newVar.valor);
     }
 
-    tabelaVariaveis[posTabVar++] = newVar;
+    tabelaVariaveis[posTabVar] = newVar;
+    posTabVar++;
     return newVar.nome;
 }
 
 void dumpTabelaVar()
 {
     fprintf(yyout, ".data\n");
-    for (int i = 0; i < posTabVar; i++) for (int i = 0; i < posTabVar; i++)
-        fprintf(yyout, "\t%s: %s %s\n", tabelaVariaveis[posTabVar].nome, tabelaVariaveis[posTabVar].tipo, tabelaVariaveis[posTabVar].valor);
+    for (int i = 0; i < posTabVar; i++)
+    {
+        fprintf(yyout, "\t%s: %s %s\n", tabelaVariaveis[i].nome, tabelaVariaveis[i].tipo, tabelaVariaveis[i].valor);
+    }
+    free(tabelaVariaveis);
 }
 
 void numToChar(int value, char *str)
 {
-    // value = 135
+    if (value == 0)
+    {
+        str[0] = '0';
+        str[1] = '\0';
+        return;
+    }
+
     char temp;
     int i = 0;
     while (value > 0)
@@ -190,6 +201,8 @@ void numToChar(int value, char *str)
         value /= 10;
         i++;
     }
+    str[i] = '\0'; // Adiciona o terminador nulo
+
     i = 0;
     int j = strlen(str) - 1;
 
@@ -201,6 +214,4 @@ void numToChar(int value, char *str)
         i++;
         j--;
     }
-    return str;
 }
-

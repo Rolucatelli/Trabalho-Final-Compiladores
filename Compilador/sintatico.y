@@ -163,11 +163,11 @@ comando
 leitura
     : T_LEIA T_IDENTIF 
     { 
-        int pos = buscaSimbolo(atomo);
+        buscaSimbolo(atomo);
     //     fprintf(yyout, "\tLEIA\n"); 
         fprintf(yyout, "\tli $v0, 5\n");
         fprintf(yyout, "\tsyscall\n");
-        fprintf(yyout, "\tsw $a0 %d\n", tabSimb[pos].end); 
+        fprintf(yyout, "\tsw $v0, %s\n", atomo); 
     }
     ;
 
@@ -176,16 +176,21 @@ escrita
     { 
         int tipo = desempilha();
         // fprintf(yyout, "\tESCR\n");
-        fprintf(yyout, "\tla $a0, %s\n", atomo);
         fprintf(yyout, "\tli $v0, 1\n");
         fprintf(yyout, "\tsyscall\n"); 
+        fprintf(yyout, "\tla $a0 %s\n", tabelaVariaveis[1].nome);
+        fprintf(yyout, "\tli $v0, 4\n");
+        fprintf(yyout, "\tsyscall\n");
     }
     | T_ESCREVA T_LITERAL
     {
         // fprintf(yyout, "\tESCR\t%s\n", atomo);
         
         // O armazenaVar retorna o nome da variável
-        fprintf(yyout, "\tla $a0, %s\n", armazenaVar(elemTab, atomo));
+        elemTab.tip = 2;
+
+
+        fprintf(yyout, "\tla $a0 %s\n", armazenaVar(elemTab, atomo));
         fprintf(yyout, "\tli $v0, 4\n");
         fprintf(yyout, "\tsyscall\n");
     }
@@ -204,7 +209,7 @@ repeticao
         if(tipo != LOG)
             yyerror("Incompatibilidade de tipos na repeticao");
         // fprintf(yyout, "\tDSVF\tL%d\n", ++rotulo);
-        fprintf(yyout, "\tbeqz $a0, L%d\n", rotulo);
+        fprintf(yyout, "\tbeqz $a0, L%d\n", ++rotulo);
         empilha(rotulo);
     }
      lista_comandos T_FIMEQNTO
@@ -253,7 +258,7 @@ atribuicao
         int pos = desempilha();
         if(tipo != tabSimb[pos].tip)
             yyerror("Incompatibilidade de tipos");
-        fprintf(yyout, "\tsw $a0 %d\n", tabSimb[pos].end);
+        fprintf(yyout, "\tsw $a0, %s\n", tabSimb[pos].id);
     }
     ;
 
@@ -292,7 +297,7 @@ expressao
         testaTipo(INT, INT, INT); 
         fprintf(yyout, "\tlw $t1 4($sp)\n"); 
         fprintf(yyout, "\taddiu $sp $sp 4\n"); 
-        fprintf(yyout, "\tmult $t1 $a0\n"); 
+        fprintf(yyout, "\tmult $t1, $a0\n"); 
         fprintf(yyout, "\tmflo $a0\n"); 
     }
     | expressao T_DIV 
@@ -342,7 +347,7 @@ expressao
         testaTipo(INT, INT, LOG);   
         fprintf(yyout, "\tlw $t1 4($sp)\n"); 
         fprintf(yyout, "\taddiu $sp $sp 4\n");
-        fprintf(yyout, "\tbeq $a0 $t1, L%d\n", ++rotulo);
+        fprintf(yyout, "\tbeq $a0, $t1, L%d\n", ++rotulo);
         fprintf(yyout, "\tli $a0, 0\n"); 
         fprintf(yyout, "\tj L%d\n", ++rotulo);
         fprintf(yyout, "L%d:\tli $a0, 1\n", rotulo - 1);
@@ -353,7 +358,7 @@ expressao
         testaTipo(LOG, LOG, LOG); 
         fprintf(yyout, "\tlw $t1 4($sp)\n"); 
         fprintf(yyout, "\taddiu $sp $sp 4\n");
-        fprintf(yyout, "\tbeqz $a0 L%d\n", ++rotulo);
+        fprintf(yyout, "\tbeqz $a0, L%d\n", ++rotulo);
         fprintf(yyout, "\tbeqz $t1 L%d\n", rotulo);
         fprintf(yyout, "\tli $a0, 1\n"); 
         fprintf(yyout, "\tj L%d\n", ++rotulo);
@@ -385,7 +390,7 @@ termo
     | T_IDENTIF     
     { 
         int pos = buscaSimbolo(atomo);
-        fprintf(yyout, "\tlw $a0 %d\n", tabSimb[pos].end); 
+        fprintf(yyout, "\tlw $a0 %s\n", atomo); 
         empilha(tabSimb[pos].tip);
     }
     | T_V           
@@ -403,14 +408,14 @@ termo
         int x = desempilha();
         if(x != LOG)
             yyerror("Incompatibilidade de tipos");
-        // fprintf(yyout, "\tNEGA\n");
-        fprintf(yyout, "\tlw $t1 4($sp)\n"); 
-        fprintf(yyout, "\taddiu $sp $sp 4\n");
-        fprintf(yyout, "\tbeqz $a0 Lx\n");
+        // // fprintf(yyout, "\tNEGA\n");
+        // fprintf(yyout, "\tlw $t1 4($sp)\n"); 
+        // fprintf(yyout, "\taddiu $sp $sp 4\n");
+        fprintf(yyout, "\tbeqz $a0, L%d\n", ++rotulo);
         fprintf(yyout, "\tli $a0, 0\n"); 
-        fprintf(yyout, "\tj Ly\n");
-        fprintf(yyout, "Lx:\tli $a0, 1\n");
-        fprintf(yyout, "Ly:\tnop\n"); 
+        fprintf(yyout, "\tj L%d\n", ++rotulo);
+        fprintf(yyout, "L%d:\tli $a0, 1\n", rotulo - 1);
+        fprintf(yyout, "L%d:\tnop\n", rotulo); 
         empilha(LOG);
     }
     | T_ABRE expressao T_FECHA
@@ -439,9 +444,9 @@ int main (int argc, char *argv[]) {
     strcpy(nameOutMips, argv[1]);
     strcat(nameIn, ".simples");
     strcat(nameOutMvs, ".mvs");
-    strcat(nameOutMips, ".abs");
+    strcat(nameOutMips, ".asm");
     yyin = fopen(nameIn, "r");
-    yyout = fopen(nameOutMvs, "w");
+    /* yyout = fopen(nameOutMvs, "w"); */
     yyout = fopen(nameOutMips, "w");
     if (!yyin) {
         perror("Erro ao abrir o arquivo");

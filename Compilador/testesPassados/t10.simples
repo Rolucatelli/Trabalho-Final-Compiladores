@@ -1,0 +1,18 @@
+programa maiordetres
+   inteiro A B C
+inicio
+   escreva "Digite o valor de A: "
+   leia A 
+   escreva "Digite o valor de B: "
+   leia B 
+   escreva "Digite o valor de C: "
+   leia C
+   escreva "O maior dos tres eh: "
+   se (A > B) e (A > C)
+      entao escreva A 
+      senao se B > C
+               entao escreva B 
+               senao escreva C
+            fimse
+   fimse
+fimprograma
