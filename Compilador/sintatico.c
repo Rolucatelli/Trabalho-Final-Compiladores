@@ -1264,7 +1264,7 @@ yyreduce:
         elemTab.end = contaVar++;
         elemTab.tip = tipo;
         insereSimbolo(elemTab);
-        armazenaVar(elemTab, null);
+        armazenaVar(elemTab, "1");
     }
 #line 1270 "sintatico.c"
     break;
@@ -1276,7 +1276,7 @@ yyreduce:
         elemTab.end = contaVar++;
         elemTab.tip = tipo;
         insereSimbolo(elemTab);
-        armazenaVar(elemTab, null);
+        armazenaVar(elemTab, "1");
     }
 #line 1282 "sintatico.c"
     break;

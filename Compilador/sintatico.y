@@ -134,7 +134,7 @@ lista_variaveis
         elemTab.end = contaVar++;
         elemTab.tip = tipo;
         insereSimbolo(elemTab);
-        armazenaVar(elemTab, null);
+        armazenaVar(elemTab, "1");
     }
     | T_IDENTIF                 
     { 
@@ -142,7 +142,7 @@ lista_variaveis
         elemTab.end = contaVar++;
         elemTab.tip = tipo;
         insereSimbolo(elemTab);
-        armazenaVar(elemTab, null);
+        armazenaVar(elemTab, "1");
     }
     ;
 

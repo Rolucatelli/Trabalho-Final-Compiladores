@@ -11,7 +11,11 @@
 
 // Tabela de Simbolos
 
+// #include <stdlib.h>
+// #include <stdio.h>
+
 int yyerror(char *);
+FILE *yyout;
 
 enum
 {
@@ -118,7 +122,7 @@ struct data
     char nome[50];
     char tipo[50];
     char valor[255];
-} tabelaVariaveis[100], constante, espaco, enter;
+} tabelaVariaveis[100], constante, espaco, enter, newVar;
 
 int posTabVar = 0;
 int numConstante = 0;
@@ -139,14 +143,14 @@ void iniciaTabelaVariaveis()
 
 char *armazenaVar(struct elemTabSimbolos var, char *valor)
 {
-    struct data newVar;
 
     if (var.tip >= 2)
     {
         // É uma String
         char tempConst[10] = "_const";
-        char charConst[3] = "";
-        strcat(tempConst, itoa(numConstante++, charConst));
+        char tam[4];
+        numToChar(numConstante++, tam);
+        strcat(tempConst, tam);
         strcpy(newVar.nome, tempConst);
         strcpy(newVar.tipo, ".asciiz");
         char tmp[280] = "\"";
@@ -170,10 +174,10 @@ void dumpTabelaVar()
 {
     fprintf(yyout, ".data\n");
     for (int i = 0; i < posTabVar; i++) for (int i = 0; i < posTabVar; i++)
-        fprintf(yyout, "\t%s: %s %s", posTabVar[i].nome, posTabVar[i].tipo, posTabVar[i].valor);
+        fprintf(yyout, "\t%s: %s %s\n", tabelaVariaveis[posTabVar].nome, tabelaVariaveis[posTabVar].tipo, tabelaVariaveis[posTabVar].valor);
 }
 
-char *itoa(int value, char *str)
+void numToChar(int value, char *str)
 {
     // value = 135
     char temp;
@@ -199,3 +203,4 @@ char *itoa(int value, char *str)
     }
     return str;
 }
+
