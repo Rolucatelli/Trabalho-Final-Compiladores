@@ -2,7 +2,7 @@
   |           UNIFAL - Universidade Federal de Alfenas.            |
   |           BACHARELADO EM CIÊNCIAS DA COMPUTAÇÃO.               |
   |                                                                |
-  |  Trabalho..:Geracao de codigo MIPS                             |
+  |  Trabalho..: Geracao de codigo MIPS                             |
   |  Disciplina: Compiladores                                      |
   |  Professor.: Luiz Eduardo da Silva                             |
   |  Aluno.....: Rodrigo Luís Gasparino Lucatelli                  |
@@ -96,12 +96,15 @@ void testaTipo(int tipo1, int tipo2, int ret)
     empilha(ret);
 }
 
-//Remove aspas de uma String
+// Remove aspas de uma String
 
-void removeAspas(char* str){
+void removeAspas(char *str)
+{
     char *src = str, *dst = str;
-    while (*src) {
-        if (*src != '"') {
+    while (*src)
+    {
+        if (*src != '"')
+        {
             *dst++ = *src;
         }
         src++;
@@ -113,7 +116,7 @@ void removeAspas(char* str){
 
 struct data
 {
-    char[50] nome; 
+    char[50] nome;
     char[50] tipo;
     char[255] valor;
 } tabelaVariaveis[100], constante;
@@ -121,8 +124,8 @@ struct data
 int posTabVar = 0;
 int numConstante = 0;
 
-
-void iniciaTabelaVariaveis(){
+void iniciaTabelaVariaveis()
+{
     struct data espaco, enter;
     strcpy(espaco.nome, "_esp");
     strcpy(espaco.tipo, ".asciiz");
@@ -131,30 +134,30 @@ void iniciaTabelaVariaveis(){
     strcpy(enter.tipo, ".asciiz");
     strcpy(enter.valor, "\"\n\"");
 
-    tabelaVariaveis[0] = espaco;
-    tabelaVariaveis[1] = enter;
-    posTabVar = 2;
+    tabelaVariaveis[posTabVar++] = espaco;
+    tabelaVariaveis[posTabVar++] = enter;
+    
 }
 
-
-void armazenaVar(struct elemTabSimbolos var, char *valor)
+char *armazenaVar(struct elemTabSimbolos var, char *valor)
 {
     struct data newVar;
-   
+
     if (var.tip >= 2)
     {
         // É uma String
         char tempConst[10] = "_const";
-        char charConst[3] = ""
-        strcat(tempConst, itoa(numConstante++, charConst))
+        char charConst[3] = "";
+        strcat(tempConst, itoa(numConstante++, charConst));
         strcpy(newVar.nome, tempConst);
         strcpy(newVar.tipo, ".asciiz");
         char tmp[280] = "\"";
-        strcat(tmp, valor)
-        strcat(tmp, "\"")
+        strcat(tmp, valor);
+        strcat(tmp, "\"");
         strcpy(newVar.valor, tmp);
-
-    } else {
+    }
+    else
+    {
         // É lógico ou inteiro
         strcpy(newVar.nome, var.id);
         strcpy(newVar.tipo, ".word");
@@ -162,39 +165,38 @@ void armazenaVar(struct elemTabSimbolos var, char *valor)
     }
 
     tabelaVariaveis[posTabVar++] = newVar;
-
+    return newVar.nome;
 }
 
-void dumpTabelaVar(){
-    for (int i = 0; i < posTabVar ; i++)
-        fprintf(yyout, "%s: %s %s", posTabVar[i].nome, posTabVar[i].tipo, posTabVar[i].valor);
-    
-    
-}
-
-char *itoa ( int value, char * str )
+void dumpTabelaVar()
 {
+    fprintf(yyout, ".data\n") for (int i = 0; i < posTabVar; i++) for (int i = 0; i < posTabVar; i++)
+        fprintf(yyout, "\t%s: %s %s", posTabVar[i].nome, posTabVar[i].tipo, posTabVar[i].valor);
+}
+
+char *itoa(int value, char *str)
+{
+    // value = 135
     char temp;
-    int i =0;
-    while (value > 0) {
+    int i = 0;
+    while (value > 0)
+    {
         int digito = value % 10;
 
         str[i] = digito + '0';
         value /= 10;
         i++;
-
     }
-   i = 0;
-   int j = strlen(str) - 1;
+    i = 0;
+    int j = strlen(str) - 1;
 
-   while (i < j) {
-      temp = str[i];
-      str[i] = str[j];
-      str[j] = temp;
-      i++;
-      j--;
-   }
+    while (i < j)
+    {
+        temp = str[i];
+        str[i] = str[j];
+        str[j] = temp;
+        i++;
+        j--;
+    }
     return str;
-
-
 }

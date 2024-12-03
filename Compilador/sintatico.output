@@ -1,10 +1,10 @@
-State 18 conflicts: 5 shift/reduce
-State 70 conflicts: 5 shift/reduce
-State 81 conflicts: 5 shift/reduce
-State 84 conflicts: 5 shift/reduce
+Estado 18 conflitos: 5 de deslocamento/redução
+Estado 70 conflitos: 5 de deslocamento/redução
+Estado 81 conflitos: 5 de deslocamento/redução
+Estado 84 conflitos: 5 de deslocamento/redução
 
 
-Grammar
+Gramática
 
     0 $accept: programa $end
 
@@ -100,7 +100,7 @@ Grammar
    55      | T_ABRE expressao T_FECHA
 
 
-Terminals, with rules where they appear
+Terminais, com as regras onde eles aparecem
 
     $end (0) 0
     error (256)
@@ -138,473 +138,473 @@ Terminals, with rules where they appear
     T_NUMERO (289) 50
 
 
-Nonterminals, with rules where they appear
+Não terminais com as regras onde eles aparecem
 
     $accept (35)
-        on left: 0
+        à esquerda: 0
     programa (36)
-        on left: 4
-        on right: 0
+        à esquerda: 4
+        à direita: 0
     $@1 (37)
-        on left: 1
-        on right: 4
+        à esquerda: 1
+        à direita: 4
     $@2 (38)
-        on left: 2
-        on right: 4
+        à esquerda: 2
+        à direita: 4
     $@3 (39)
-        on left: 3
-        on right: 4
+        à esquerda: 3
+        à direita: 4
     cabecalho (40)
-        on left: 5
-        on right: 4
+        à esquerda: 5
+        à direita: 4
     variaveis (41)
-        on left: 6 7
-        on right: 4
+        à esquerda: 6 7
+        à direita: 4
     declaracao_variaveis (42)
-        on left: 8 9
-        on right: 7 8
+        à esquerda: 8 9
+        à direita: 7 8
     tipo (43)
-        on left: 10 11
-        on right: 8 9
+        à esquerda: 10 11
+        à direita: 8 9
     lista_variaveis (44)
-        on left: 12 13
-        on right: 8 9 12
+        à esquerda: 12 13
+        à direita: 8 9 12
     lista_comandos (45)
-        on left: 14 15 16
-        on right: 4 14 27 30
+        à esquerda: 14 15 16
+        à direita: 4 14 27 30
     comando (46)
-        on left: 17 18 19 20 21
-        on right: 14 15
+        à esquerda: 17 18 19 20 21
+        à direita: 14 15
     leitura (47)
-        on left: 22
-        on right: 17
+        à esquerda: 22
+        à direita: 17
     escrita (48)
-        on left: 23 24
-        on right: 18
+        à esquerda: 23 24
+        à direita: 18
     repeticao (49)
-        on left: 27
-        on right: 19
+        à esquerda: 27
+        à direita: 19
     $@4 (50)
-        on left: 25
-        on right: 27
+        à esquerda: 25
+        à direita: 27
     $@5 (51)
-        on left: 26
-        on right: 27
+        à esquerda: 26
+        à direita: 27
     selecao (52)
-        on left: 30
-        on right: 20
+        à esquerda: 30
+        à direita: 20
     $@6 (53)
-        on left: 28
-        on right: 30
+        à esquerda: 28
+        à direita: 30
     $@7 (54)
-        on left: 29
-        on right: 30
+        à esquerda: 29
+        à direita: 30
     atribuicao (55)
-        on left: 32
-        on right: 21
+        à esquerda: 32
+        à direita: 21
     $@8 (56)
-        on left: 31
-        on right: 32
+        à esquerda: 31
+        à direita: 32
     expressao (57)
-        on left: 34 36 38 40 42 44 46 47 48 49
-        on right: 23 27 30 32 34 36 38 40 42 44 46 47 48 55
+        à esquerda: 34 36 38 40 42 44 46 47 48 49
+        à direita: 23 27 30 32 34 36 38 40 42 44 46 47 48 55
     $@9 (58)
-        on left: 33
-        on right: 34
+        à esquerda: 33
+        à direita: 34
     $@10 (59)
-        on left: 35
-        on right: 36
+        à esquerda: 35
+        à direita: 36
     $@11 (60)
-        on left: 37
-        on right: 38
+        à esquerda: 37
+        à direita: 38
     $@12 (61)
-        on left: 39
-        on right: 40
+        à esquerda: 39
+        à direita: 40
     $@13 (62)
-        on left: 41
-        on right: 42
+        à esquerda: 41
+        à direita: 42
     $@14 (63)
-        on left: 43
-        on right: 44
+        à esquerda: 43
+        à direita: 44
     $@15 (64)
-        on left: 45
-        on right: 46
+        à esquerda: 45
+        à direita: 46
     termo (65)
-        on left: 50 51 52 53 54 55
-        on right: 49 54
+        à esquerda: 50 51 52 53 54 55
+        à direita: 49 54
 
 
-State 0
+Estado 0
 
     0 $accept: • programa $end
 
-    T_PROGRAMA  shift, and go to state 1
+    T_PROGRAMA  deslocar, e ir ao estado 1
 
-    programa   go to state 2
-    cabecalho  go to state 3
+    programa   ir ao estado 2
+    cabecalho  ir ao estado 3
 
 
-State 1
+Estado 1
 
     5 cabecalho: T_PROGRAMA • T_IDENTIF
 
-    T_IDENTIF  shift, and go to state 4
+    T_IDENTIF  deslocar, e ir ao estado 4
 
 
-State 2
+Estado 2
 
     0 $accept: programa • $end
 
-    $end  shift, and go to state 5
+    $end  deslocar, e ir ao estado 5
 
 
-State 3
+Estado 3
 
     4 programa: cabecalho • $@1 variaveis $@2 T_INICIO $@3 lista_comandos T_FIMPROG
 
-    $default  reduce using rule 1 ($@1)
+    $padrão  reduzir usando a regra 1 ($@1)
 
-    $@1  go to state 6
+    $@1  ir ao estado 6
 
 
-State 4
+Estado 4
 
     5 cabecalho: T_PROGRAMA T_IDENTIF •
 
-    $default  reduce using rule 5 (cabecalho)
+    $padrão  reduzir usando a regra 5 (cabecalho)
 
 
-State 5
+Estado 5
 
     0 $accept: programa $end •
 
-    $default  accept
+    $padrão  aceitar
 
 
-State 6
+Estado 6
 
     4 programa: cabecalho $@1 • variaveis $@2 T_INICIO $@3 lista_comandos T_FIMPROG
 
-    T_INTEIRO  shift, and go to state 7
-    T_LOGICO   shift, and go to state 8
+    T_INTEIRO  deslocar, e ir ao estado 7
+    T_LOGICO   deslocar, e ir ao estado 8
 
-    $default  reduce using rule 6 (variaveis)
+    $padrão  reduzir usando a regra 6 (variaveis)
 
-    variaveis             go to state 9
-    declaracao_variaveis  go to state 10
-    tipo                  go to state 11
+    variaveis             ir ao estado 9
+    declaracao_variaveis  ir ao estado 10
+    tipo                  ir ao estado 11
 
 
-State 7
+Estado 7
 
    10 tipo: T_INTEIRO •
 
-    $default  reduce using rule 10 (tipo)
+    $padrão  reduzir usando a regra 10 (tipo)
 
 
-State 8
+Estado 8
 
    11 tipo: T_LOGICO •
 
-    $default  reduce using rule 11 (tipo)
+    $padrão  reduzir usando a regra 11 (tipo)
 
 
-State 9
+Estado 9
 
     4 programa: cabecalho $@1 variaveis • $@2 T_INICIO $@3 lista_comandos T_FIMPROG
 
-    $default  reduce using rule 2 ($@2)
+    $padrão  reduzir usando a regra 2 ($@2)
 
-    $@2  go to state 12
+    $@2  ir ao estado 12
 
 
-State 10
+Estado 10
 
     7 variaveis: declaracao_variaveis •
 
-    $default  reduce using rule 7 (variaveis)
+    $padrão  reduzir usando a regra 7 (variaveis)
 
 
-State 11
+Estado 11
 
     8 declaracao_variaveis: tipo • lista_variaveis declaracao_variaveis
     9                     | tipo • lista_variaveis
 
-    T_IDENTIF  shift, and go to state 13
+    T_IDENTIF  deslocar, e ir ao estado 13
 
-    lista_variaveis  go to state 14
+    lista_variaveis  ir ao estado 14
 
 
-State 12
+Estado 12
 
     4 programa: cabecalho $@1 variaveis $@2 • T_INICIO $@3 lista_comandos T_FIMPROG
 
-    T_INICIO  shift, and go to state 15
+    T_INICIO  deslocar, e ir ao estado 15
 
 
-State 13
+Estado 13
 
    13 lista_variaveis: T_IDENTIF •
 
-    $default  reduce using rule 13 (lista_variaveis)
+    $padrão  reduzir usando a regra 13 (lista_variaveis)
 
 
-State 14
+Estado 14
 
     8 declaracao_variaveis: tipo lista_variaveis • declaracao_variaveis
     9                     | tipo lista_variaveis •
    12 lista_variaveis: lista_variaveis • T_IDENTIF
 
-    T_INTEIRO  shift, and go to state 7
-    T_LOGICO   shift, and go to state 8
-    T_IDENTIF  shift, and go to state 16
+    T_INTEIRO  deslocar, e ir ao estado 7
+    T_LOGICO   deslocar, e ir ao estado 8
+    T_IDENTIF  deslocar, e ir ao estado 16
 
-    $default  reduce using rule 9 (declaracao_variaveis)
+    $padrão  reduzir usando a regra 9 (declaracao_variaveis)
 
-    declaracao_variaveis  go to state 17
-    tipo                  go to state 11
+    declaracao_variaveis  ir ao estado 17
+    tipo                  ir ao estado 11
 
 
-State 15
+Estado 15
 
     4 programa: cabecalho $@1 variaveis $@2 T_INICIO • $@3 lista_comandos T_FIMPROG
 
-    $default  reduce using rule 3 ($@3)
+    $padrão  reduzir usando a regra 3 ($@3)
 
-    $@3  go to state 18
+    $@3  ir ao estado 18
 
 
-State 16
+Estado 16
 
    12 lista_variaveis: lista_variaveis T_IDENTIF •
 
-    $default  reduce using rule 12 (lista_variaveis)
+    $padrão  reduzir usando a regra 12 (lista_variaveis)
 
 
-State 17
+Estado 17
 
     8 declaracao_variaveis: tipo lista_variaveis declaracao_variaveis •
 
-    $default  reduce using rule 8 (declaracao_variaveis)
+    $padrão  reduzir usando a regra 8 (declaracao_variaveis)
 
 
-State 18
+Estado 18
 
     4 programa: cabecalho $@1 variaveis $@2 T_INICIO $@3 • lista_comandos T_FIMPROG
 
-    T_LEIA      shift, and go to state 19
-    T_ESCREVA   shift, and go to state 20
-    T_SE        shift, and go to state 21
-    T_ENQUANTO  shift, and go to state 22
-    T_IDENTIF   shift, and go to state 23
+    T_LEIA      deslocar, e ir ao estado 19
+    T_ESCREVA   deslocar, e ir ao estado 20
+    T_SE        deslocar, e ir ao estado 21
+    T_ENQUANTO  deslocar, e ir ao estado 22
+    T_IDENTIF   deslocar, e ir ao estado 23
 
-    T_LEIA      [reduce using rule 16 (lista_comandos)]
-    T_ESCREVA   [reduce using rule 16 (lista_comandos)]
-    T_SE        [reduce using rule 16 (lista_comandos)]
-    T_ENQUANTO  [reduce using rule 16 (lista_comandos)]
-    T_IDENTIF   [reduce using rule 16 (lista_comandos)]
-    $default    reduce using rule 16 (lista_comandos)
+    T_LEIA      [reduzir usando a regra 16 (lista_comandos)]
+    T_ESCREVA   [reduzir usando a regra 16 (lista_comandos)]
+    T_SE        [reduzir usando a regra 16 (lista_comandos)]
+    T_ENQUANTO  [reduzir usando a regra 16 (lista_comandos)]
+    T_IDENTIF   [reduzir usando a regra 16 (lista_comandos)]
+    $padrão     reduzir usando a regra 16 (lista_comandos)
 
-    lista_comandos  go to state 24
-    comando         go to state 25
-    leitura         go to state 26
-    escrita         go to state 27
-    repeticao       go to state 28
-    selecao         go to state 29
-    atribuicao      go to state 30
+    lista_comandos  ir ao estado 24
+    comando         ir ao estado 25
+    leitura         ir ao estado 26
+    escrita         ir ao estado 27
+    repeticao       ir ao estado 28
+    selecao         ir ao estado 29
+    atribuicao      ir ao estado 30
 
 
-State 19
+Estado 19
 
    22 leitura: T_LEIA • T_IDENTIF
 
-    T_IDENTIF  shift, and go to state 31
+    T_IDENTIF  deslocar, e ir ao estado 31
 
 
-State 20
+Estado 20
 
    23 escrita: T_ESCREVA • expressao
    24        | T_ESCREVA • T_LITERAL
 
-    T_NAO      shift, and go to state 32
-    T_ABRE     shift, and go to state 33
-    T_LITERAL  shift, and go to state 34
-    T_V        shift, and go to state 35
-    T_F        shift, and go to state 36
-    T_IDENTIF  shift, and go to state 37
-    T_NUMERO   shift, and go to state 38
+    T_NAO      deslocar, e ir ao estado 32
+    T_ABRE     deslocar, e ir ao estado 33
+    T_LITERAL  deslocar, e ir ao estado 34
+    T_V        deslocar, e ir ao estado 35
+    T_F        deslocar, e ir ao estado 36
+    T_IDENTIF  deslocar, e ir ao estado 37
+    T_NUMERO   deslocar, e ir ao estado 38
 
-    expressao  go to state 39
-    termo      go to state 40
+    expressao  ir ao estado 39
+    termo      ir ao estado 40
 
 
-State 21
+Estado 21
 
    30 selecao: T_SE • expressao T_ENTAO $@6 lista_comandos T_SENAO $@7 lista_comandos T_FIMSE
 
-    T_NAO      shift, and go to state 32
-    T_ABRE     shift, and go to state 33
-    T_V        shift, and go to state 35
-    T_F        shift, and go to state 36
-    T_IDENTIF  shift, and go to state 37
-    T_NUMERO   shift, and go to state 38
+    T_NAO      deslocar, e ir ao estado 32
+    T_ABRE     deslocar, e ir ao estado 33
+    T_V        deslocar, e ir ao estado 35
+    T_F        deslocar, e ir ao estado 36
+    T_IDENTIF  deslocar, e ir ao estado 37
+    T_NUMERO   deslocar, e ir ao estado 38
 
-    expressao  go to state 41
-    termo      go to state 40
+    expressao  ir ao estado 41
+    termo      ir ao estado 40
 
 
-State 22
+Estado 22
 
    27 repeticao: T_ENQUANTO • $@4 expressao T_FACA $@5 lista_comandos T_FIMEQNTO
 
-    $default  reduce using rule 25 ($@4)
+    $padrão  reduzir usando a regra 25 ($@4)
 
-    $@4  go to state 42
+    $@4  ir ao estado 42
 
 
-State 23
+Estado 23
 
    32 atribuicao: T_IDENTIF • $@8 T_ATRIB expressao
 
-    $default  reduce using rule 31 ($@8)
+    $padrão  reduzir usando a regra 31 ($@8)
 
-    $@8  go to state 43
+    $@8  ir ao estado 43
 
 
-State 24
+Estado 24
 
     4 programa: cabecalho $@1 variaveis $@2 T_INICIO $@3 lista_comandos • T_FIMPROG
    14 lista_comandos: lista_comandos • comando
 
-    T_FIMPROG   shift, and go to state 44
-    T_LEIA      shift, and go to state 19
-    T_ESCREVA   shift, and go to state 20
-    T_SE        shift, and go to state 21
-    T_ENQUANTO  shift, and go to state 22
-    T_IDENTIF   shift, and go to state 23
+    T_FIMPROG   deslocar, e ir ao estado 44
+    T_LEIA      deslocar, e ir ao estado 19
+    T_ESCREVA   deslocar, e ir ao estado 20
+    T_SE        deslocar, e ir ao estado 21
+    T_ENQUANTO  deslocar, e ir ao estado 22
+    T_IDENTIF   deslocar, e ir ao estado 23
 
-    comando     go to state 45
-    leitura     go to state 26
-    escrita     go to state 27
-    repeticao   go to state 28
-    selecao     go to state 29
-    atribuicao  go to state 30
+    comando     ir ao estado 45
+    leitura     ir ao estado 26
+    escrita     ir ao estado 27
+    repeticao   ir ao estado 28
+    selecao     ir ao estado 29
+    atribuicao  ir ao estado 30
 
 
-State 25
+Estado 25
 
    15 lista_comandos: comando •
 
-    $default  reduce using rule 15 (lista_comandos)
+    $padrão  reduzir usando a regra 15 (lista_comandos)
 
 
-State 26
+Estado 26
 
    17 comando: leitura •
 
-    $default  reduce using rule 17 (comando)
+    $padrão  reduzir usando a regra 17 (comando)
 
 
-State 27
+Estado 27
 
    18 comando: escrita •
 
-    $default  reduce using rule 18 (comando)
+    $padrão  reduzir usando a regra 18 (comando)
 
 
-State 28
+Estado 28
 
    19 comando: repeticao •
 
-    $default  reduce using rule 19 (comando)
+    $padrão  reduzir usando a regra 19 (comando)
 
 
-State 29
+Estado 29
 
    20 comando: selecao •
 
-    $default  reduce using rule 20 (comando)
+    $padrão  reduzir usando a regra 20 (comando)
 
 
-State 30
+Estado 30
 
    21 comando: atribuicao •
 
-    $default  reduce using rule 21 (comando)
+    $padrão  reduzir usando a regra 21 (comando)
 
 
-State 31
+Estado 31
 
    22 leitura: T_LEIA T_IDENTIF •
 
-    $default  reduce using rule 22 (leitura)
+    $padrão  reduzir usando a regra 22 (leitura)
 
 
-State 32
+Estado 32
 
    54 termo: T_NAO • termo
 
-    T_NAO      shift, and go to state 32
-    T_ABRE     shift, and go to state 33
-    T_V        shift, and go to state 35
-    T_F        shift, and go to state 36
-    T_IDENTIF  shift, and go to state 37
-    T_NUMERO   shift, and go to state 38
+    T_NAO      deslocar, e ir ao estado 32
+    T_ABRE     deslocar, e ir ao estado 33
+    T_V        deslocar, e ir ao estado 35
+    T_F        deslocar, e ir ao estado 36
+    T_IDENTIF  deslocar, e ir ao estado 37
+    T_NUMERO   deslocar, e ir ao estado 38
 
-    termo  go to state 46
+    termo  ir ao estado 46
 
 
-State 33
+Estado 33
 
    55 termo: T_ABRE • expressao T_FECHA
 
-    T_NAO      shift, and go to state 32
-    T_ABRE     shift, and go to state 33
-    T_V        shift, and go to state 35
-    T_F        shift, and go to state 36
-    T_IDENTIF  shift, and go to state 37
-    T_NUMERO   shift, and go to state 38
+    T_NAO      deslocar, e ir ao estado 32
+    T_ABRE     deslocar, e ir ao estado 33
+    T_V        deslocar, e ir ao estado 35
+    T_F        deslocar, e ir ao estado 36
+    T_IDENTIF  deslocar, e ir ao estado 37
+    T_NUMERO   deslocar, e ir ao estado 38
 
-    expressao  go to state 47
-    termo      go to state 40
+    expressao  ir ao estado 47
+    termo      ir ao estado 40
 
 
-State 34
+Estado 34
 
    24 escrita: T_ESCREVA T_LITERAL •
 
-    $default  reduce using rule 24 (escrita)
+    $padrão  reduzir usando a regra 24 (escrita)
 
 
-State 35
+Estado 35
 
    52 termo: T_V •
 
-    $default  reduce using rule 52 (termo)
+    $padrão  reduzir usando a regra 52 (termo)
 
 
-State 36
+Estado 36
 
    53 termo: T_F •
 
-    $default  reduce using rule 53 (termo)
+    $padrão  reduzir usando a regra 53 (termo)
 
 
-State 37
+Estado 37
 
    51 termo: T_IDENTIF •
 
-    $default  reduce using rule 51 (termo)
+    $padrão  reduzir usando a regra 51 (termo)
 
 
-State 38
+Estado 38
 
    50 termo: T_NUMERO •
 
-    $default  reduce using rule 50 (termo)
+    $padrão  reduzir usando a regra 50 (termo)
 
 
-State 39
+Estado 39
 
    23 escrita: T_ESCREVA expressao •
    34 expressao: expressao • T_MAIS $@9 expressao
@@ -617,27 +617,27 @@ State 39
    47          | expressao • T_E expressao
    48          | expressao • T_OU expressao
 
-    T_MAIS   shift, and go to state 48
-    T_MENOS  shift, and go to state 49
-    T_VEZES  shift, and go to state 50
-    T_DIV    shift, and go to state 51
-    T_MAIOR  shift, and go to state 52
-    T_MENOR  shift, and go to state 53
-    T_IGUAL  shift, and go to state 54
-    T_E      shift, and go to state 55
-    T_OU     shift, and go to state 56
+    T_MAIS   deslocar, e ir ao estado 48
+    T_MENOS  deslocar, e ir ao estado 49
+    T_VEZES  deslocar, e ir ao estado 50
+    T_DIV    deslocar, e ir ao estado 51
+    T_MAIOR  deslocar, e ir ao estado 52
+    T_MENOR  deslocar, e ir ao estado 53
+    T_IGUAL  deslocar, e ir ao estado 54
+    T_E      deslocar, e ir ao estado 55
+    T_OU     deslocar, e ir ao estado 56
 
-    $default  reduce using rule 23 (escrita)
+    $padrão  reduzir usando a regra 23 (escrita)
 
 
-State 40
+Estado 40
 
    49 expressao: termo •
 
-    $default  reduce using rule 49 (expressao)
+    $padrão  reduzir usando a regra 49 (expressao)
 
 
-State 41
+Estado 41
 
    30 selecao: T_SE expressao • T_ENTAO $@6 lista_comandos T_SENAO $@7 lista_comandos T_FIMSE
    34 expressao: expressao • T_MAIS $@9 expressao
@@ -650,62 +650,62 @@ State 41
    47          | expressao • T_E expressao
    48          | expressao • T_OU expressao
 
-    T_ENTAO  shift, and go to state 57
-    T_MAIS   shift, and go to state 48
-    T_MENOS  shift, and go to state 49
-    T_VEZES  shift, and go to state 50
-    T_DIV    shift, and go to state 51
-    T_MAIOR  shift, and go to state 52
-    T_MENOR  shift, and go to state 53
-    T_IGUAL  shift, and go to state 54
-    T_E      shift, and go to state 55
-    T_OU     shift, and go to state 56
+    T_ENTAO  deslocar, e ir ao estado 57
+    T_MAIS   deslocar, e ir ao estado 48
+    T_MENOS  deslocar, e ir ao estado 49
+    T_VEZES  deslocar, e ir ao estado 50
+    T_DIV    deslocar, e ir ao estado 51
+    T_MAIOR  deslocar, e ir ao estado 52
+    T_MENOR  deslocar, e ir ao estado 53
+    T_IGUAL  deslocar, e ir ao estado 54
+    T_E      deslocar, e ir ao estado 55
+    T_OU     deslocar, e ir ao estado 56
 
 
-State 42
+Estado 42
 
    27 repeticao: T_ENQUANTO $@4 • expressao T_FACA $@5 lista_comandos T_FIMEQNTO
 
-    T_NAO      shift, and go to state 32
-    T_ABRE     shift, and go to state 33
-    T_V        shift, and go to state 35
-    T_F        shift, and go to state 36
-    T_IDENTIF  shift, and go to state 37
-    T_NUMERO   shift, and go to state 38
+    T_NAO      deslocar, e ir ao estado 32
+    T_ABRE     deslocar, e ir ao estado 33
+    T_V        deslocar, e ir ao estado 35
+    T_F        deslocar, e ir ao estado 36
+    T_IDENTIF  deslocar, e ir ao estado 37
+    T_NUMERO   deslocar, e ir ao estado 38
 
-    expressao  go to state 58
-    termo      go to state 40
+    expressao  ir ao estado 58
+    termo      ir ao estado 40
 
 
-State 43
+Estado 43
 
    32 atribuicao: T_IDENTIF $@8 • T_ATRIB expressao
 
-    T_ATRIB  shift, and go to state 59
+    T_ATRIB  deslocar, e ir ao estado 59
 
 
-State 44
+Estado 44
 
     4 programa: cabecalho $@1 variaveis $@2 T_INICIO $@3 lista_comandos T_FIMPROG •
 
-    $default  reduce using rule 4 (programa)
+    $padrão  reduzir usando a regra 4 (programa)
 
 
-State 45
+Estado 45
 
    14 lista_comandos: lista_comandos comando •
 
-    $default  reduce using rule 14 (lista_comandos)
+    $padrão  reduzir usando a regra 14 (lista_comandos)
 
 
-State 46
+Estado 46
 
    54 termo: T_NAO termo •
 
-    $default  reduce using rule 54 (termo)
+    $padrão  reduzir usando a regra 54 (termo)
 
 
-State 47
+Estado 47
 
    34 expressao: expressao • T_MAIS $@9 expressao
    36          | expressao • T_MENOS $@10 expressao
@@ -718,121 +718,121 @@ State 47
    48          | expressao • T_OU expressao
    55 termo: T_ABRE expressao • T_FECHA
 
-    T_MAIS   shift, and go to state 48
-    T_MENOS  shift, and go to state 49
-    T_VEZES  shift, and go to state 50
-    T_DIV    shift, and go to state 51
-    T_MAIOR  shift, and go to state 52
-    T_MENOR  shift, and go to state 53
-    T_IGUAL  shift, and go to state 54
-    T_E      shift, and go to state 55
-    T_OU     shift, and go to state 56
-    T_FECHA  shift, and go to state 60
+    T_MAIS   deslocar, e ir ao estado 48
+    T_MENOS  deslocar, e ir ao estado 49
+    T_VEZES  deslocar, e ir ao estado 50
+    T_DIV    deslocar, e ir ao estado 51
+    T_MAIOR  deslocar, e ir ao estado 52
+    T_MENOR  deslocar, e ir ao estado 53
+    T_IGUAL  deslocar, e ir ao estado 54
+    T_E      deslocar, e ir ao estado 55
+    T_OU     deslocar, e ir ao estado 56
+    T_FECHA  deslocar, e ir ao estado 60
 
 
-State 48
+Estado 48
 
    34 expressao: expressao T_MAIS • $@9 expressao
 
-    $default  reduce using rule 33 ($@9)
+    $padrão  reduzir usando a regra 33 ($@9)
 
-    $@9  go to state 61
+    $@9  ir ao estado 61
 
 
-State 49
+Estado 49
 
    36 expressao: expressao T_MENOS • $@10 expressao
 
-    $default  reduce using rule 35 ($@10)
+    $padrão  reduzir usando a regra 35 ($@10)
 
-    $@10  go to state 62
+    $@10  ir ao estado 62
 
 
-State 50
+Estado 50
 
    38 expressao: expressao T_VEZES • $@11 expressao
 
-    $default  reduce using rule 37 ($@11)
+    $padrão  reduzir usando a regra 37 ($@11)
 
-    $@11  go to state 63
+    $@11  ir ao estado 63
 
 
-State 51
+Estado 51
 
    40 expressao: expressao T_DIV • $@12 expressao
 
-    $default  reduce using rule 39 ($@12)
+    $padrão  reduzir usando a regra 39 ($@12)
 
-    $@12  go to state 64
+    $@12  ir ao estado 64
 
 
-State 52
+Estado 52
 
    42 expressao: expressao T_MAIOR • $@13 expressao
 
-    $default  reduce using rule 41 ($@13)
+    $padrão  reduzir usando a regra 41 ($@13)
 
-    $@13  go to state 65
+    $@13  ir ao estado 65
 
 
-State 53
+Estado 53
 
    44 expressao: expressao T_MENOR • $@14 expressao
 
-    $default  reduce using rule 43 ($@14)
+    $padrão  reduzir usando a regra 43 ($@14)
 
-    $@14  go to state 66
+    $@14  ir ao estado 66
 
 
-State 54
+Estado 54
 
    46 expressao: expressao T_IGUAL • $@15 expressao
 
-    $default  reduce using rule 45 ($@15)
+    $padrão  reduzir usando a regra 45 ($@15)
 
-    $@15  go to state 67
+    $@15  ir ao estado 67
 
 
-State 55
+Estado 55
 
    47 expressao: expressao T_E • expressao
 
-    T_NAO      shift, and go to state 32
-    T_ABRE     shift, and go to state 33
-    T_V        shift, and go to state 35
-    T_F        shift, and go to state 36
-    T_IDENTIF  shift, and go to state 37
-    T_NUMERO   shift, and go to state 38
+    T_NAO      deslocar, e ir ao estado 32
+    T_ABRE     deslocar, e ir ao estado 33
+    T_V        deslocar, e ir ao estado 35
+    T_F        deslocar, e ir ao estado 36
+    T_IDENTIF  deslocar, e ir ao estado 37
+    T_NUMERO   deslocar, e ir ao estado 38
 
-    expressao  go to state 68
-    termo      go to state 40
+    expressao  ir ao estado 68
+    termo      ir ao estado 40
 
 
-State 56
+Estado 56
 
    48 expressao: expressao T_OU • expressao
 
-    T_NAO      shift, and go to state 32
-    T_ABRE     shift, and go to state 33
-    T_V        shift, and go to state 35
-    T_F        shift, and go to state 36
-    T_IDENTIF  shift, and go to state 37
-    T_NUMERO   shift, and go to state 38
+    T_NAO      deslocar, e ir ao estado 32
+    T_ABRE     deslocar, e ir ao estado 33
+    T_V        deslocar, e ir ao estado 35
+    T_F        deslocar, e ir ao estado 36
+    T_IDENTIF  deslocar, e ir ao estado 37
+    T_NUMERO   deslocar, e ir ao estado 38
 
-    expressao  go to state 69
-    termo      go to state 40
+    expressao  ir ao estado 69
+    termo      ir ao estado 40
 
 
-State 57
+Estado 57
 
    30 selecao: T_SE expressao T_ENTAO • $@6 lista_comandos T_SENAO $@7 lista_comandos T_FIMSE
 
-    $default  reduce using rule 28 ($@6)
+    $padrão  reduzir usando a regra 28 ($@6)
 
-    $@6  go to state 70
+    $@6  ir ao estado 70
 
 
-State 58
+Estado 58
 
    27 repeticao: T_ENQUANTO $@4 expressao • T_FACA $@5 lista_comandos T_FIMEQNTO
    34 expressao: expressao • T_MAIS $@9 expressao
@@ -845,146 +845,146 @@ State 58
    47          | expressao • T_E expressao
    48          | expressao • T_OU expressao
 
-    T_FACA   shift, and go to state 71
-    T_MAIS   shift, and go to state 48
-    T_MENOS  shift, and go to state 49
-    T_VEZES  shift, and go to state 50
-    T_DIV    shift, and go to state 51
-    T_MAIOR  shift, and go to state 52
-    T_MENOR  shift, and go to state 53
-    T_IGUAL  shift, and go to state 54
-    T_E      shift, and go to state 55
-    T_OU     shift, and go to state 56
+    T_FACA   deslocar, e ir ao estado 71
+    T_MAIS   deslocar, e ir ao estado 48
+    T_MENOS  deslocar, e ir ao estado 49
+    T_VEZES  deslocar, e ir ao estado 50
+    T_DIV    deslocar, e ir ao estado 51
+    T_MAIOR  deslocar, e ir ao estado 52
+    T_MENOR  deslocar, e ir ao estado 53
+    T_IGUAL  deslocar, e ir ao estado 54
+    T_E      deslocar, e ir ao estado 55
+    T_OU     deslocar, e ir ao estado 56
 
 
-State 59
+Estado 59
 
    32 atribuicao: T_IDENTIF $@8 T_ATRIB • expressao
 
-    T_NAO      shift, and go to state 32
-    T_ABRE     shift, and go to state 33
-    T_V        shift, and go to state 35
-    T_F        shift, and go to state 36
-    T_IDENTIF  shift, and go to state 37
-    T_NUMERO   shift, and go to state 38
+    T_NAO      deslocar, e ir ao estado 32
+    T_ABRE     deslocar, e ir ao estado 33
+    T_V        deslocar, e ir ao estado 35
+    T_F        deslocar, e ir ao estado 36
+    T_IDENTIF  deslocar, e ir ao estado 37
+    T_NUMERO   deslocar, e ir ao estado 38
 
-    expressao  go to state 72
-    termo      go to state 40
+    expressao  ir ao estado 72
+    termo      ir ao estado 40
 
 
-State 60
+Estado 60
 
    55 termo: T_ABRE expressao T_FECHA •
 
-    $default  reduce using rule 55 (termo)
+    $padrão  reduzir usando a regra 55 (termo)
 
 
-State 61
+Estado 61
 
    34 expressao: expressao T_MAIS $@9 • expressao
 
-    T_NAO      shift, and go to state 32
-    T_ABRE     shift, and go to state 33
-    T_V        shift, and go to state 35
-    T_F        shift, and go to state 36
-    T_IDENTIF  shift, and go to state 37
-    T_NUMERO   shift, and go to state 38
+    T_NAO      deslocar, e ir ao estado 32
+    T_ABRE     deslocar, e ir ao estado 33
+    T_V        deslocar, e ir ao estado 35
+    T_F        deslocar, e ir ao estado 36
+    T_IDENTIF  deslocar, e ir ao estado 37
+    T_NUMERO   deslocar, e ir ao estado 38
 
-    expressao  go to state 73
-    termo      go to state 40
+    expressao  ir ao estado 73
+    termo      ir ao estado 40
 
 
-State 62
+Estado 62
 
    36 expressao: expressao T_MENOS $@10 • expressao
 
-    T_NAO      shift, and go to state 32
-    T_ABRE     shift, and go to state 33
-    T_V        shift, and go to state 35
-    T_F        shift, and go to state 36
-    T_IDENTIF  shift, and go to state 37
-    T_NUMERO   shift, and go to state 38
+    T_NAO      deslocar, e ir ao estado 32
+    T_ABRE     deslocar, e ir ao estado 33
+    T_V        deslocar, e ir ao estado 35
+    T_F        deslocar, e ir ao estado 36
+    T_IDENTIF  deslocar, e ir ao estado 37
+    T_NUMERO   deslocar, e ir ao estado 38
 
-    expressao  go to state 74
-    termo      go to state 40
+    expressao  ir ao estado 74
+    termo      ir ao estado 40
 
 
-State 63
+Estado 63
 
    38 expressao: expressao T_VEZES $@11 • expressao
 
-    T_NAO      shift, and go to state 32
-    T_ABRE     shift, and go to state 33
-    T_V        shift, and go to state 35
-    T_F        shift, and go to state 36
-    T_IDENTIF  shift, and go to state 37
-    T_NUMERO   shift, and go to state 38
+    T_NAO      deslocar, e ir ao estado 32
+    T_ABRE     deslocar, e ir ao estado 33
+    T_V        deslocar, e ir ao estado 35
+    T_F        deslocar, e ir ao estado 36
+    T_IDENTIF  deslocar, e ir ao estado 37
+    T_NUMERO   deslocar, e ir ao estado 38
 
-    expressao  go to state 75
-    termo      go to state 40
+    expressao  ir ao estado 75
+    termo      ir ao estado 40
 
 
-State 64
+Estado 64
 
    40 expressao: expressao T_DIV $@12 • expressao
 
-    T_NAO      shift, and go to state 32
-    T_ABRE     shift, and go to state 33
-    T_V        shift, and go to state 35
-    T_F        shift, and go to state 36
-    T_IDENTIF  shift, and go to state 37
-    T_NUMERO   shift, and go to state 38
+    T_NAO      deslocar, e ir ao estado 32
+    T_ABRE     deslocar, e ir ao estado 33
+    T_V        deslocar, e ir ao estado 35
+    T_F        deslocar, e ir ao estado 36
+    T_IDENTIF  deslocar, e ir ao estado 37
+    T_NUMERO   deslocar, e ir ao estado 38
 
-    expressao  go to state 76
-    termo      go to state 40
+    expressao  ir ao estado 76
+    termo      ir ao estado 40
 
 
-State 65
+Estado 65
 
    42 expressao: expressao T_MAIOR $@13 • expressao
 
-    T_NAO      shift, and go to state 32
-    T_ABRE     shift, and go to state 33
-    T_V        shift, and go to state 35
-    T_F        shift, and go to state 36
-    T_IDENTIF  shift, and go to state 37
-    T_NUMERO   shift, and go to state 38
+    T_NAO      deslocar, e ir ao estado 32
+    T_ABRE     deslocar, e ir ao estado 33
+    T_V        deslocar, e ir ao estado 35
+    T_F        deslocar, e ir ao estado 36
+    T_IDENTIF  deslocar, e ir ao estado 37
+    T_NUMERO   deslocar, e ir ao estado 38
 
-    expressao  go to state 77
-    termo      go to state 40
+    expressao  ir ao estado 77
+    termo      ir ao estado 40
 
 
-State 66
+Estado 66
 
    44 expressao: expressao T_MENOR $@14 • expressao
 
-    T_NAO      shift, and go to state 32
-    T_ABRE     shift, and go to state 33
-    T_V        shift, and go to state 35
-    T_F        shift, and go to state 36
-    T_IDENTIF  shift, and go to state 37
-    T_NUMERO   shift, and go to state 38
+    T_NAO      deslocar, e ir ao estado 32
+    T_ABRE     deslocar, e ir ao estado 33
+    T_V        deslocar, e ir ao estado 35
+    T_F        deslocar, e ir ao estado 36
+    T_IDENTIF  deslocar, e ir ao estado 37
+    T_NUMERO   deslocar, e ir ao estado 38
 
-    expressao  go to state 78
-    termo      go to state 40
+    expressao  ir ao estado 78
+    termo      ir ao estado 40
 
 
-State 67
+Estado 67
 
    46 expressao: expressao T_IGUAL $@15 • expressao
 
-    T_NAO      shift, and go to state 32
-    T_ABRE     shift, and go to state 33
-    T_V        shift, and go to state 35
-    T_F        shift, and go to state 36
-    T_IDENTIF  shift, and go to state 37
-    T_NUMERO   shift, and go to state 38
+    T_NAO      deslocar, e ir ao estado 32
+    T_ABRE     deslocar, e ir ao estado 33
+    T_V        deslocar, e ir ao estado 35
+    T_F        deslocar, e ir ao estado 36
+    T_IDENTIF  deslocar, e ir ao estado 37
+    T_NUMERO   deslocar, e ir ao estado 38
 
-    expressao  go to state 79
-    termo      go to state 40
+    expressao  ir ao estado 79
+    termo      ir ao estado 40
 
 
-State 68
+Estado 68
 
    34 expressao: expressao • T_MAIS $@9 expressao
    36          | expressao • T_MENOS $@10 expressao
@@ -997,10 +997,10 @@ State 68
    47          | expressao T_E expressao •
    48          | expressao • T_OU expressao
 
-    $default  reduce using rule 47 (expressao)
+    $padrão  reduzir usando a regra 47 (expressao)
 
 
-State 69
+Estado 69
 
    34 expressao: expressao • T_MAIS $@9 expressao
    36          | expressao • T_MENOS $@10 expressao
@@ -1013,45 +1013,45 @@ State 69
    48          | expressao • T_OU expressao
    48          | expressao T_OU expressao •
 
-    $default  reduce using rule 48 (expressao)
+    $padrão  reduzir usando a regra 48 (expressao)
 
 
-State 70
+Estado 70
 
    30 selecao: T_SE expressao T_ENTAO $@6 • lista_comandos T_SENAO $@7 lista_comandos T_FIMSE
 
-    T_LEIA      shift, and go to state 19
-    T_ESCREVA   shift, and go to state 20
-    T_SE        shift, and go to state 21
-    T_ENQUANTO  shift, and go to state 22
-    T_IDENTIF   shift, and go to state 23
+    T_LEIA      deslocar, e ir ao estado 19
+    T_ESCREVA   deslocar, e ir ao estado 20
+    T_SE        deslocar, e ir ao estado 21
+    T_ENQUANTO  deslocar, e ir ao estado 22
+    T_IDENTIF   deslocar, e ir ao estado 23
 
-    T_LEIA      [reduce using rule 16 (lista_comandos)]
-    T_ESCREVA   [reduce using rule 16 (lista_comandos)]
-    T_SE        [reduce using rule 16 (lista_comandos)]
-    T_ENQUANTO  [reduce using rule 16 (lista_comandos)]
-    T_IDENTIF   [reduce using rule 16 (lista_comandos)]
-    $default    reduce using rule 16 (lista_comandos)
+    T_LEIA      [reduzir usando a regra 16 (lista_comandos)]
+    T_ESCREVA   [reduzir usando a regra 16 (lista_comandos)]
+    T_SE        [reduzir usando a regra 16 (lista_comandos)]
+    T_ENQUANTO  [reduzir usando a regra 16 (lista_comandos)]
+    T_IDENTIF   [reduzir usando a regra 16 (lista_comandos)]
+    $padrão     reduzir usando a regra 16 (lista_comandos)
 
-    lista_comandos  go to state 80
-    comando         go to state 25
-    leitura         go to state 26
-    escrita         go to state 27
-    repeticao       go to state 28
-    selecao         go to state 29
-    atribuicao      go to state 30
+    lista_comandos  ir ao estado 80
+    comando         ir ao estado 25
+    leitura         ir ao estado 26
+    escrita         ir ao estado 27
+    repeticao       ir ao estado 28
+    selecao         ir ao estado 29
+    atribuicao      ir ao estado 30
 
 
-State 71
+Estado 71
 
    27 repeticao: T_ENQUANTO $@4 expressao T_FACA • $@5 lista_comandos T_FIMEQNTO
 
-    $default  reduce using rule 26 ($@5)
+    $padrão  reduzir usando a regra 26 ($@5)
 
-    $@5  go to state 81
+    $@5  ir ao estado 81
 
 
-State 72
+Estado 72
 
    32 atribuicao: T_IDENTIF $@8 T_ATRIB expressao •
    34 expressao: expressao • T_MAIS $@9 expressao
@@ -1064,20 +1064,20 @@ State 72
    47          | expressao • T_E expressao
    48          | expressao • T_OU expressao
 
-    T_MAIS   shift, and go to state 48
-    T_MENOS  shift, and go to state 49
-    T_VEZES  shift, and go to state 50
-    T_DIV    shift, and go to state 51
-    T_MAIOR  shift, and go to state 52
-    T_MENOR  shift, and go to state 53
-    T_IGUAL  shift, and go to state 54
-    T_E      shift, and go to state 55
-    T_OU     shift, and go to state 56
+    T_MAIS   deslocar, e ir ao estado 48
+    T_MENOS  deslocar, e ir ao estado 49
+    T_VEZES  deslocar, e ir ao estado 50
+    T_DIV    deslocar, e ir ao estado 51
+    T_MAIOR  deslocar, e ir ao estado 52
+    T_MENOR  deslocar, e ir ao estado 53
+    T_IGUAL  deslocar, e ir ao estado 54
+    T_E      deslocar, e ir ao estado 55
+    T_OU     deslocar, e ir ao estado 56
 
-    $default  reduce using rule 32 (atribuicao)
+    $padrão  reduzir usando a regra 32 (atribuicao)
 
 
-State 73
+Estado 73
 
    34 expressao: expressao • T_MAIS $@9 expressao
    34          | expressao T_MAIS $@9 expressao •
@@ -1090,18 +1090,18 @@ State 73
    47          | expressao • T_E expressao
    48          | expressao • T_OU expressao
 
-    T_VEZES  shift, and go to state 50
-    T_DIV    shift, and go to state 51
-    T_MAIOR  shift, and go to state 52
-    T_MENOR  shift, and go to state 53
-    T_IGUAL  shift, and go to state 54
-    T_E      shift, and go to state 55
-    T_OU     shift, and go to state 56
+    T_VEZES  deslocar, e ir ao estado 50
+    T_DIV    deslocar, e ir ao estado 51
+    T_MAIOR  deslocar, e ir ao estado 52
+    T_MENOR  deslocar, e ir ao estado 53
+    T_IGUAL  deslocar, e ir ao estado 54
+    T_E      deslocar, e ir ao estado 55
+    T_OU     deslocar, e ir ao estado 56
 
-    $default  reduce using rule 34 (expressao)
+    $padrão  reduzir usando a regra 34 (expressao)
 
 
-State 74
+Estado 74
 
    34 expressao: expressao • T_MAIS $@9 expressao
    36          | expressao • T_MENOS $@10 expressao
@@ -1114,18 +1114,18 @@ State 74
    47          | expressao • T_E expressao
    48          | expressao • T_OU expressao
 
-    T_VEZES  shift, and go to state 50
-    T_DIV    shift, and go to state 51
-    T_MAIOR  shift, and go to state 52
-    T_MENOR  shift, and go to state 53
-    T_IGUAL  shift, and go to state 54
-    T_E      shift, and go to state 55
-    T_OU     shift, and go to state 56
+    T_VEZES  deslocar, e ir ao estado 50
+    T_DIV    deslocar, e ir ao estado 51
+    T_MAIOR  deslocar, e ir ao estado 52
+    T_MENOR  deslocar, e ir ao estado 53
+    T_IGUAL  deslocar, e ir ao estado 54
+    T_E      deslocar, e ir ao estado 55
+    T_OU     deslocar, e ir ao estado 56
 
-    $default  reduce using rule 36 (expressao)
+    $padrão  reduzir usando a regra 36 (expressao)
 
 
-State 75
+Estado 75
 
    34 expressao: expressao • T_MAIS $@9 expressao
    36          | expressao • T_MENOS $@10 expressao
@@ -1138,16 +1138,16 @@ State 75
    47          | expressao • T_E expressao
    48          | expressao • T_OU expressao
 
-    T_MAIOR  shift, and go to state 52
-    T_MENOR  shift, and go to state 53
-    T_IGUAL  shift, and go to state 54
-    T_E      shift, and go to state 55
-    T_OU     shift, and go to state 56
+    T_MAIOR  deslocar, e ir ao estado 52
+    T_MENOR  deslocar, e ir ao estado 53
+    T_IGUAL  deslocar, e ir ao estado 54
+    T_E      deslocar, e ir ao estado 55
+    T_OU     deslocar, e ir ao estado 56
 
-    $default  reduce using rule 38 (expressao)
+    $padrão  reduzir usando a regra 38 (expressao)
 
 
-State 76
+Estado 76
 
    34 expressao: expressao • T_MAIS $@9 expressao
    36          | expressao • T_MENOS $@10 expressao
@@ -1160,16 +1160,16 @@ State 76
    47          | expressao • T_E expressao
    48          | expressao • T_OU expressao
 
-    T_MAIOR  shift, and go to state 52
-    T_MENOR  shift, and go to state 53
-    T_IGUAL  shift, and go to state 54
-    T_E      shift, and go to state 55
-    T_OU     shift, and go to state 56
+    T_MAIOR  deslocar, e ir ao estado 52
+    T_MENOR  deslocar, e ir ao estado 53
+    T_IGUAL  deslocar, e ir ao estado 54
+    T_E      deslocar, e ir ao estado 55
+    T_OU     deslocar, e ir ao estado 56
 
-    $default  reduce using rule 40 (expressao)
+    $padrão  reduzir usando a regra 40 (expressao)
 
 
-State 77
+Estado 77
 
    34 expressao: expressao • T_MAIS $@9 expressao
    36          | expressao • T_MENOS $@10 expressao
@@ -1182,13 +1182,13 @@ State 77
    47          | expressao • T_E expressao
    48          | expressao • T_OU expressao
 
-    T_E   shift, and go to state 55
-    T_OU  shift, and go to state 56
+    T_E   deslocar, e ir ao estado 55
+    T_OU  deslocar, e ir ao estado 56
 
-    $default  reduce using rule 42 (expressao)
+    $padrão  reduzir usando a regra 42 (expressao)
 
 
-State 78
+Estado 78
 
    34 expressao: expressao • T_MAIS $@9 expressao
    36          | expressao • T_MENOS $@10 expressao
@@ -1201,13 +1201,13 @@ State 78
    47          | expressao • T_E expressao
    48          | expressao • T_OU expressao
 
-    T_E   shift, and go to state 55
-    T_OU  shift, and go to state 56
+    T_E   deslocar, e ir ao estado 55
+    T_OU  deslocar, e ir ao estado 56
 
-    $default  reduce using rule 44 (expressao)
+    $padrão  reduzir usando a regra 44 (expressao)
 
 
-State 79
+Estado 79
 
    34 expressao: expressao • T_MAIS $@9 expressao
    36          | expressao • T_MENOS $@10 expressao
@@ -1220,142 +1220,142 @@ State 79
    47          | expressao • T_E expressao
    48          | expressao • T_OU expressao
 
-    T_E   shift, and go to state 55
-    T_OU  shift, and go to state 56
+    T_E   deslocar, e ir ao estado 55
+    T_OU  deslocar, e ir ao estado 56
 
-    $default  reduce using rule 46 (expressao)
+    $padrão  reduzir usando a regra 46 (expressao)
 
 
-State 80
+Estado 80
 
    14 lista_comandos: lista_comandos • comando
    30 selecao: T_SE expressao T_ENTAO $@6 lista_comandos • T_SENAO $@7 lista_comandos T_FIMSE
 
-    T_LEIA      shift, and go to state 19
-    T_ESCREVA   shift, and go to state 20
-    T_SE        shift, and go to state 21
-    T_SENAO     shift, and go to state 82
-    T_ENQUANTO  shift, and go to state 22
-    T_IDENTIF   shift, and go to state 23
+    T_LEIA      deslocar, e ir ao estado 19
+    T_ESCREVA   deslocar, e ir ao estado 20
+    T_SE        deslocar, e ir ao estado 21
+    T_SENAO     deslocar, e ir ao estado 82
+    T_ENQUANTO  deslocar, e ir ao estado 22
+    T_IDENTIF   deslocar, e ir ao estado 23
 
-    comando     go to state 45
-    leitura     go to state 26
-    escrita     go to state 27
-    repeticao   go to state 28
-    selecao     go to state 29
-    atribuicao  go to state 30
+    comando     ir ao estado 45
+    leitura     ir ao estado 26
+    escrita     ir ao estado 27
+    repeticao   ir ao estado 28
+    selecao     ir ao estado 29
+    atribuicao  ir ao estado 30
 
 
-State 81
+Estado 81
 
    27 repeticao: T_ENQUANTO $@4 expressao T_FACA $@5 • lista_comandos T_FIMEQNTO
 
-    T_LEIA      shift, and go to state 19
-    T_ESCREVA   shift, and go to state 20
-    T_SE        shift, and go to state 21
-    T_ENQUANTO  shift, and go to state 22
-    T_IDENTIF   shift, and go to state 23
+    T_LEIA      deslocar, e ir ao estado 19
+    T_ESCREVA   deslocar, e ir ao estado 20
+    T_SE        deslocar, e ir ao estado 21
+    T_ENQUANTO  deslocar, e ir ao estado 22
+    T_IDENTIF   deslocar, e ir ao estado 23
 
-    T_LEIA      [reduce using rule 16 (lista_comandos)]
-    T_ESCREVA   [reduce using rule 16 (lista_comandos)]
-    T_SE        [reduce using rule 16 (lista_comandos)]
-    T_ENQUANTO  [reduce using rule 16 (lista_comandos)]
-    T_IDENTIF   [reduce using rule 16 (lista_comandos)]
-    $default    reduce using rule 16 (lista_comandos)
+    T_LEIA      [reduzir usando a regra 16 (lista_comandos)]
+    T_ESCREVA   [reduzir usando a regra 16 (lista_comandos)]
+    T_SE        [reduzir usando a regra 16 (lista_comandos)]
+    T_ENQUANTO  [reduzir usando a regra 16 (lista_comandos)]
+    T_IDENTIF   [reduzir usando a regra 16 (lista_comandos)]
+    $padrão     reduzir usando a regra 16 (lista_comandos)
 
-    lista_comandos  go to state 83
-    comando         go to state 25
-    leitura         go to state 26
-    escrita         go to state 27
-    repeticao       go to state 28
-    selecao         go to state 29
-    atribuicao      go to state 30
+    lista_comandos  ir ao estado 83
+    comando         ir ao estado 25
+    leitura         ir ao estado 26
+    escrita         ir ao estado 27
+    repeticao       ir ao estado 28
+    selecao         ir ao estado 29
+    atribuicao      ir ao estado 30
 
 
-State 82
+Estado 82
 
    30 selecao: T_SE expressao T_ENTAO $@6 lista_comandos T_SENAO • $@7 lista_comandos T_FIMSE
 
-    $default  reduce using rule 29 ($@7)
+    $padrão  reduzir usando a regra 29 ($@7)
 
-    $@7  go to state 84
+    $@7  ir ao estado 84
 
 
-State 83
+Estado 83
 
    14 lista_comandos: lista_comandos • comando
    27 repeticao: T_ENQUANTO $@4 expressao T_FACA $@5 lista_comandos • T_FIMEQNTO
 
-    T_LEIA      shift, and go to state 19
-    T_ESCREVA   shift, and go to state 20
-    T_SE        shift, and go to state 21
-    T_ENQUANTO  shift, and go to state 22
-    T_FIMEQNTO  shift, and go to state 85
-    T_IDENTIF   shift, and go to state 23
+    T_LEIA      deslocar, e ir ao estado 19
+    T_ESCREVA   deslocar, e ir ao estado 20
+    T_SE        deslocar, e ir ao estado 21
+    T_ENQUANTO  deslocar, e ir ao estado 22
+    T_FIMEQNTO  deslocar, e ir ao estado 85
+    T_IDENTIF   deslocar, e ir ao estado 23
 
-    comando     go to state 45
-    leitura     go to state 26
-    escrita     go to state 27
-    repeticao   go to state 28
-    selecao     go to state 29
-    atribuicao  go to state 30
+    comando     ir ao estado 45
+    leitura     ir ao estado 26
+    escrita     ir ao estado 27
+    repeticao   ir ao estado 28
+    selecao     ir ao estado 29
+    atribuicao  ir ao estado 30
 
 
-State 84
+Estado 84
 
    30 selecao: T_SE expressao T_ENTAO $@6 lista_comandos T_SENAO $@7 • lista_comandos T_FIMSE
 
-    T_LEIA      shift, and go to state 19
-    T_ESCREVA   shift, and go to state 20
-    T_SE        shift, and go to state 21
-    T_ENQUANTO  shift, and go to state 22
-    T_IDENTIF   shift, and go to state 23
+    T_LEIA      deslocar, e ir ao estado 19
+    T_ESCREVA   deslocar, e ir ao estado 20
+    T_SE        deslocar, e ir ao estado 21
+    T_ENQUANTO  deslocar, e ir ao estado 22
+    T_IDENTIF   deslocar, e ir ao estado 23
 
-    T_LEIA      [reduce using rule 16 (lista_comandos)]
-    T_ESCREVA   [reduce using rule 16 (lista_comandos)]
-    T_SE        [reduce using rule 16 (lista_comandos)]
-    T_ENQUANTO  [reduce using rule 16 (lista_comandos)]
-    T_IDENTIF   [reduce using rule 16 (lista_comandos)]
-    $default    reduce using rule 16 (lista_comandos)
+    T_LEIA      [reduzir usando a regra 16 (lista_comandos)]
+    T_ESCREVA   [reduzir usando a regra 16 (lista_comandos)]
+    T_SE        [reduzir usando a regra 16 (lista_comandos)]
+    T_ENQUANTO  [reduzir usando a regra 16 (lista_comandos)]
+    T_IDENTIF   [reduzir usando a regra 16 (lista_comandos)]
+    $padrão     reduzir usando a regra 16 (lista_comandos)
 
-    lista_comandos  go to state 86
-    comando         go to state 25
-    leitura         go to state 26
-    escrita         go to state 27
-    repeticao       go to state 28
-    selecao         go to state 29
-    atribuicao      go to state 30
+    lista_comandos  ir ao estado 86
+    comando         ir ao estado 25
+    leitura         ir ao estado 26
+    escrita         ir ao estado 27
+    repeticao       ir ao estado 28
+    selecao         ir ao estado 29
+    atribuicao      ir ao estado 30
 
 
-State 85
+Estado 85
 
    27 repeticao: T_ENQUANTO $@4 expressao T_FACA $@5 lista_comandos T_FIMEQNTO •
 
-    $default  reduce using rule 27 (repeticao)
+    $padrão  reduzir usando a regra 27 (repeticao)
 
 
-State 86
+Estado 86
 
    14 lista_comandos: lista_comandos • comando
    30 selecao: T_SE expressao T_ENTAO $@6 lista_comandos T_SENAO $@7 lista_comandos • T_FIMSE
 
-    T_LEIA      shift, and go to state 19
-    T_ESCREVA   shift, and go to state 20
-    T_SE        shift, and go to state 21
-    T_FIMSE     shift, and go to state 87
-    T_ENQUANTO  shift, and go to state 22
-    T_IDENTIF   shift, and go to state 23
+    T_LEIA      deslocar, e ir ao estado 19
+    T_ESCREVA   deslocar, e ir ao estado 20
+    T_SE        deslocar, e ir ao estado 21
+    T_FIMSE     deslocar, e ir ao estado 87
+    T_ENQUANTO  deslocar, e ir ao estado 22
+    T_IDENTIF   deslocar, e ir ao estado 23
 
-    comando     go to state 45
-    leitura     go to state 26
-    escrita     go to state 27
-    repeticao   go to state 28
-    selecao     go to state 29
-    atribuicao  go to state 30
+    comando     ir ao estado 45
+    leitura     ir ao estado 26
+    escrita     ir ao estado 27
+    repeticao   ir ao estado 28
+    selecao     ir ao estado 29
+    atribuicao  ir ao estado 30
 
 
-State 87
+Estado 87
 
    30 selecao: T_SE expressao T_ENTAO $@6 lista_comandos T_SENAO $@7 lista_comandos T_FIMSE •
 
-    $default  reduce using rule 30 (selecao)
+    $padrão  reduzir usando a regra 30 (selecao)

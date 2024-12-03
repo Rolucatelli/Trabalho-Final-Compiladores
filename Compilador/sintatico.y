@@ -2,7 +2,7 @@
   |           UNIFAL - Universidade Federal de Alfenas.            |
   |           BACHARELADO EM CIÊNCIAS DA COMPUTAÇÃO.               |
   |                                                                |
-  |  Trabalho..:Geracao de codigo MIPS                             |
+  |  Trabalho..: Geracao de codigo MIPS                             |
   |  Disciplina: Compiladores                                      |
   |  Professor.: Luiz Eduardo da Silva                             |
   |  Aluno.....: Rodrigo Luís Gasparino Lucatelli                  |
@@ -77,7 +77,7 @@ programa
         // fprintf(yyout, "\tINPP\n");
         fprintf(yyout, ".text\n");
         fprintf(yyout, "\t.globl main\n");
-        iniciaTabelaVariaveis()
+        iniciaTabelaVariaveis();
     }
      variaveis 
     { 
@@ -97,6 +97,7 @@ programa
         fprintf(yyout, "\tli $v0, 10\n");
         fprintf(yyout, "\tli $a0, 0\n");
         fprintf(yyout, "\tsyscall\n");
+        dumpTabelaVar();
     }
     ;
 
@@ -181,13 +182,11 @@ escrita
     | T_ESCREVA T_LITERAL
     {
         // fprintf(yyout, "\tESCR\t%s\n", atomo);
-        /////////////////////////////////Tem que dar um jeito de carregar a constante no lugar do atomo///////////////////
-        // TODO: Implementar a escrita de literais e o nome delas
-        fprintf(yyout, "\tla $a0, %s\n", atomo);
+        
+        // O armazenaVar retorna o nome da variável
+        fprintf(yyout, "\tla $a0, %s\n", armazenaVar(elemTab, atomo));
         fprintf(yyout, "\tli $v0, 4\n");
         fprintf(yyout, "\tsyscall\n");
-        
-        armazenaVar(elemTab, atomo);
     }
     ;
 
@@ -244,8 +243,8 @@ selecao
 atribuicao
     : T_IDENTIF
     { 
-        // int pos = buscaSimbolo(atomo);
-        // empilha(pos);
+        int pos = buscaSimbolo(atomo);
+        empilha(pos);
     }
      T_ATRIB expressao
     {
@@ -342,35 +341,35 @@ expressao
         testaTipo(INT, INT, LOG);   
         fprintf(yyout, "\tlw $t1 4($sp)\n"); 
         fprintf(yyout, "\taddiu $sp $sp 4\n");
-        fprintf(yyout, "\tbeq $a0 $t1, Lx\n");
+        fprintf(yyout, "\tbeq $a0 $t1, L%d\n", ++rotulo);
         fprintf(yyout, "\tli $a0, 0\n"); 
-        fprintf(yyout, "\tj Ly\n");
-        fprintf(yyout, "Lx:\tli $a0, 1\n");
-        fprintf(yyout, "Ly:\tnop\n");   
+        fprintf(yyout, "\tj L%d\n", ++rotulo);
+        fprintf(yyout, "L%d:\tli $a0, 1\n", rotulo - 1);
+        fprintf(yyout, "L%d:\tnop\n", rotulo);   
     }
     | expressao T_E expressao       
     {
         testaTipo(LOG, LOG, LOG); 
         fprintf(yyout, "\tlw $t1 4($sp)\n"); 
         fprintf(yyout, "\taddiu $sp $sp 4\n");
-        fprintf(yyout, "\tbeqz $a0 Lx\n");
-        fprintf(yyout, "\tbeqz $t1 Lx\n");
+        fprintf(yyout, "\tbeqz $a0 L%d\n", ++rotulo);
+        fprintf(yyout, "\tbeqz $t1 L%d\n", rotulo);
         fprintf(yyout, "\tli $a0, 1\n"); 
-        fprintf(yyout, "\tj Ly\n");
-        fprintf(yyout, "Lx:\tli $a0, 0\n");
-        fprintf(yyout, "Ly:\tnop\n");  
+        fprintf(yyout, "\tj L%d\n", ++rotulo);
+        fprintf(yyout, "L%d:\tli $a0, 0\n", rotulo - 1);
+        fprintf(yyout, "L%d:\tnop\n", rotulo);  
     }
     | expressao T_OU expressao      
     {
         testaTipo(LOG, LOG, LOG); 
         fprintf(yyout, "\tlw $t1 4($sp)\n"); 
         fprintf(yyout, "\taddiu $sp $sp 4\n");
-        fprintf(yyout, "\tbnez $a0 Lx\n");
-        fprintf(yyout, "\tbnez $t1 Lx\n");
+        fprintf(yyout, "\tbnez $a0 L%d\n", ++rotulo);
+        fprintf(yyout, "\tbnez $t1 L%d\n", rotulo);
         fprintf(yyout, "\tli $a0, 1\n"); 
-        fprintf(yyout, "\tj Ly\n");
-        fprintf(yyout, "Lx:\tli $a0, 0\n");
-        fprintf(yyout, "Ly:\tnop\n"); 
+        fprintf(yyout, "\tj L%d\n", ++rotulo);
+        fprintf(yyout, "L%d:\tli $a0, 0\n", rotulo - 1);
+        fprintf(yyout, "L%d:\tnop\n", rotulo); 
     }
     | termo
     ;
