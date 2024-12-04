@@ -2,7 +2,7 @@
   |           UNIFAL - Universidade Federal de Alfenas.            |
   |           BACHARELADO EM CIÊNCIAS DA COMPUTAÇÃO.               |
   |                                                                |
-  |  Trabalho..: Geracao de codigo MIPS                             |
+  |  Trabalho..: Geracao de codigo MIPS                            |
   |  Disciplina: Compiladores                                      |
   |  Professor.: Luiz Eduardo da Silva                             |
   |  Aluno.....: Rodrigo Luís Gasparino Lucatelli                  |

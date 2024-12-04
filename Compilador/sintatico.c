@@ -147,25 +147,25 @@ enum yysymbol_kind_t
   YYSYMBOL_programa = 36,                  /* programa  */
   YYSYMBOL_37_1 = 37,                      /* $@1  */
   YYSYMBOL_38_2 = 38,                      /* $@2  */
-  YYSYMBOL_39_3 = 39,                      /* $@3  */
-  YYSYMBOL_cabecalho = 40,                 /* cabecalho  */
-  YYSYMBOL_variaveis = 41,                 /* variaveis  */
-  YYSYMBOL_declaracao_variaveis = 42,      /* declaracao_variaveis  */
-  YYSYMBOL_tipo = 43,                      /* tipo  */
-  YYSYMBOL_lista_variaveis = 44,           /* lista_variaveis  */
-  YYSYMBOL_lista_comandos = 45,            /* lista_comandos  */
-  YYSYMBOL_comando = 46,                   /* comando  */
-  YYSYMBOL_leitura = 47,                   /* leitura  */
-  YYSYMBOL_escrita = 48,                   /* escrita  */
-  YYSYMBOL_repeticao = 49,                 /* repeticao  */
+  YYSYMBOL_cabecalho = 39,                 /* cabecalho  */
+  YYSYMBOL_variaveis = 40,                 /* variaveis  */
+  YYSYMBOL_declaracao_variaveis = 41,      /* declaracao_variaveis  */
+  YYSYMBOL_tipo = 42,                      /* tipo  */
+  YYSYMBOL_lista_variaveis = 43,           /* lista_variaveis  */
+  YYSYMBOL_lista_comandos = 44,            /* lista_comandos  */
+  YYSYMBOL_comando = 45,                   /* comando  */
+  YYSYMBOL_leitura = 46,                   /* leitura  */
+  YYSYMBOL_escrita = 47,                   /* escrita  */
+  YYSYMBOL_repeticao = 48,                 /* repeticao  */
+  YYSYMBOL_49_3 = 49,                      /* $@3  */
   YYSYMBOL_50_4 = 50,                      /* $@4  */
-  YYSYMBOL_51_5 = 51,                      /* $@5  */
-  YYSYMBOL_selecao = 52,                   /* selecao  */
+  YYSYMBOL_selecao = 51,                   /* selecao  */
+  YYSYMBOL_52_5 = 52,                      /* $@5  */
   YYSYMBOL_53_6 = 53,                      /* $@6  */
-  YYSYMBOL_54_7 = 54,                      /* $@7  */
-  YYSYMBOL_atribuicao = 55,                /* atribuicao  */
-  YYSYMBOL_56_8 = 56,                      /* $@8  */
-  YYSYMBOL_expressao = 57,                 /* expressao  */
+  YYSYMBOL_atribuicao = 54,                /* atribuicao  */
+  YYSYMBOL_55_7 = 55,                      /* $@7  */
+  YYSYMBOL_expressao = 56,                 /* expressao  */
+  YYSYMBOL_57_8 = 57,                      /* $@8  */
   YYSYMBOL_58_9 = 58,                      /* $@9  */
   YYSYMBOL_59_10 = 59,                     /* $@10  */
   YYSYMBOL_60_11 = 60,                     /* $@11  */
@@ -591,7 +591,7 @@ static const char *const yytname[] =
   "T_MENOS", "T_VEZES", "T_DIV", "T_MAIOR", "T_MENOR", "T_IGUAL", "T_E",
   "T_OU", "T_NAO", "T_ATRIB", "T_ABRE", "T_FECHA", "T_INTEIRO", "T_LOGICO",
   "T_LITERAL", "T_V", "T_F", "T_IDENTIF", "T_NUMERO", "$accept",
-  "programa", "$@1", "$@2", "$@3", "cabecalho", "variaveis",
+  "programa", "$@1", "$@2", "cabecalho", "variaveis",
   "declaracao_variaveis", "tipo", "lista_variaveis", "lista_comandos",
   "comando", "leitura", "escrita", "repeticao", "$@4", "$@5", "selecao",
   "$@6", "$@7", "atribuicao", "$@8", "expressao", "$@9", "$@10", "$@11",
