@@ -89,6 +89,9 @@ programa
      T_INICIO
     {
         fprintf(yyout, "main:\tnop\n");
+
+        tabelaVariaveis[posTabVar++] = espaco;
+        tabelaVariaveis[posTabVar++] = enter;
     }
     lista_comandos T_FIMPROG
     {
@@ -178,7 +181,7 @@ escrita
         // fprintf(yyout, "\tESCR\n");
         fprintf(yyout, "\tli $v0, 1\n");
         fprintf(yyout, "\tsyscall\n"); 
-        fprintf(yyout, "\tla $a0 %s\n", tabelaVariaveis[1].nome);
+        fprintf(yyout, "\tla $a0 %s\n", enter.nome);
         fprintf(yyout, "\tli $v0, 4\n");
         fprintf(yyout, "\tsyscall\n");
     }
@@ -353,19 +356,27 @@ expressao
         fprintf(yyout, "L%d:\tli $a0, 1\n", rotulo - 1);
         fprintf(yyout, "L%d:\tnop\n", rotulo);   
     }
-    | expressao T_E expressao       
+    | expressao T_E 
+    {
+        fprintf(yyout, "\tsw $a0 0($sp)\n"); 
+        fprintf(yyout, "\taddiu $sp $sp -4\n"); 
+    } expressao       
     {
         testaTipo(LOG, LOG, LOG); 
         fprintf(yyout, "\tlw $t1 4($sp)\n"); 
         fprintf(yyout, "\taddiu $sp $sp 4\n");
         fprintf(yyout, "\tbeqz $a0, L%d\n", ++rotulo);
-        fprintf(yyout, "\tbeqz $t1 L%d\n", rotulo);
+        fprintf(yyout, "\tbeqz $t1, L%d\n", rotulo);
         fprintf(yyout, "\tli $a0, 1\n"); 
         fprintf(yyout, "\tj L%d\n", ++rotulo);
         fprintf(yyout, "L%d:\tli $a0, 0\n", rotulo - 1);
         fprintf(yyout, "L%d:\tnop\n", rotulo);  
     }
-    | expressao T_OU expressao      
+    | expressao T_OU 
+    {
+        fprintf(yyout, "\tsw $a0 0($sp)\n"); 
+        fprintf(yyout, "\taddiu $sp $sp -4\n"); 
+    } expressao      
     {
         testaTipo(LOG, LOG, LOG); 
         fprintf(yyout, "\tlw $t1 4($sp)\n"); 

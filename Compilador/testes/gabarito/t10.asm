@@ -29,6 +29,8 @@ main:	nop
 	lw $t1 4($sp)
 	addiu $sp $sp 4
 	slt $a0, $a0, $t1
+	sw $a0 0($sp)
+	addiu $sp $sp -4
 	lw $a0 A
 	sw $a0 0($sp)
 	addiu $sp $sp -4
@@ -39,7 +41,7 @@ main:	nop
 	lw $t1 4($sp)
 	addiu $sp $sp 4
 	beqz $a0, L1
-	beqz $t1 L1
+	beqz $t1, L1
 	li $a0, 1
 	j L2
 L1:	li $a0, 0
@@ -82,11 +84,11 @@ fim:	nop
 	li $a0, 0
 	syscall
 .data
-	_esp: .asciiz " "
-	_ent: .asciiz "\n"
 	A: .word 1
 	B: .word 1
 	C: .word 1
+	_esp: .asciiz " "
+	_ent: .asciiz "\n"
 	_const0: .asciiz "Digite o valor de A: "
 	_const1: .asciiz "Digite o valor de B: "
 	_const2: .asciiz "Digite o valor de C: "

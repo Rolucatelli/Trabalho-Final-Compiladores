@@ -51,9 +51,9 @@ fim:	nop
 	li $a0, 0
 	syscall
 .data
-	_esp: .asciiz " "
-	_ent: .asciiz "\n"
 	n: .word 1
 	fat: .word 1
+	_esp: .asciiz " "
+	_ent: .asciiz "\n"
 	_const0: .asciiz "Digite o valor de n: "
 	_const1: .asciiz "fatorial = "

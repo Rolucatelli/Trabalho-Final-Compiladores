@@ -65,8 +65,8 @@ fim:	nop
 	li $a0, 0
 	syscall
 .data
-	_esp: .asciiz " "
-	_ent: .asciiz "\n"
 	num1: .word 1
 	num2: .word 1
 	X: .word 1
+	_esp: .asciiz " "
+	_ent: .asciiz "\n"

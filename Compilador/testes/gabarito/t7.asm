@@ -6,17 +6,11 @@ main:	nop
 	syscall
 	li $v0, 5
 	syscall
-	sw $v0, base
-	la $a0 _const1
-	li $v0, 4
-	syscall
-	li $v0, 5
-	syscall
-	sw $v0, expoente
+	sw $v0, n
 	li $a0 1
-	sw $a0, potencia
+	sw $a0, fat
 L1:	nop
-	lw $a0 expoente
+	lw $a0 n
 	sw $a0 0($sp)
 	addiu $sp $sp -4
 	li $a0 0
@@ -24,29 +18,29 @@ L1:	nop
 	addiu $sp $sp 4
 	slt $a0, $a0, $t1
 	beqz $a0, L2
-	lw $a0 potencia
+	lw $a0 fat
 	sw $a0 0($sp)
 	addiu $sp $sp -4
-	lw $a0 base
+	lw $a0 n
 	lw $t1 4($sp)
 	addiu $sp $sp 4
 	mult $t1, $a0
 	mflo $a0
-	sw $a0, potencia
-	lw $a0 expoente
+	sw $a0, fat
+	lw $a0 n
 	sw $a0 0($sp)
 	addiu $sp $sp -4
 	li $a0 1
 	lw $t1 4($sp)
 	addiu $sp $sp 4
 	sub $a0, $t1, $a0
-	sw $a0, expoente
+	sw $a0, n
 	j L1
 L2:	nop
-	la $a0 _const2
+	la $a0 _const1
 	li $v0, 4
 	syscall
-	lw $a0 potencia
+	lw $a0 fat
 	li $v0, 1
 	syscall
 	la $a0 _ent
@@ -57,11 +51,9 @@ fim:	nop
 	li $a0, 0
 	syscall
 .data
+	n: .word 1
+	fat: .word 1
 	_esp: .asciiz " "
 	_ent: .asciiz "\n"
-	base: .word 1
-	expoente: .word 1
-	potencia: .word 1
-	_const0: .asciiz "Digite a base: "
-	_const1: .asciiz "Digite o expoente: "
-	_const2: .asciiz "Potencia (base^expoente) = "
+	_const0: .asciiz "Digite o valor de n: "
+	_const1: .asciiz "fatorial = "
