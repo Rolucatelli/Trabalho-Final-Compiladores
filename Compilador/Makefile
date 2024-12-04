@@ -1,6 +1,6 @@
 
 
-TEST = t10
+TEST = t7
 
 
 simples : lexico.l sintatico.y utils.c;\

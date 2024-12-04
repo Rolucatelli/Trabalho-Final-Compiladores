@@ -143,7 +143,6 @@ void iniciaTabelaVariaveis()
 
 char *armazenaVar(struct elemTabSimbolos var, char *valor)
 {
-    printf("\n\tvar.tip:%d\n", var.tip);
     if (var.tip >= 2)
     {
         // É uma String
@@ -158,13 +157,9 @@ char *armazenaVar(struct elemTabSimbolos var, char *valor)
     else
     {
         // É lógico ou inteiro
-        // printf("\n\tvar.id:%s\n", var.id);
         strcpy(newVar.nome, var.id);
-        // printf("\n\tnewVar.id:%s\n", newVar.nome);
         strcpy(newVar.tipo, ".word");
-        // printf("\n\tnewVar.tipo:%s\n", newVar.tipo);
         strcpy(newVar.valor, "1");
-        // printf("\n\tnewVar.valor:%s\n", newVar.valor);
     }
 
     tabelaVariaveis[posTabVar] = newVar;

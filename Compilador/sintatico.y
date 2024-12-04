@@ -80,13 +80,7 @@ programa
         fprintf(yyout, "\t.globl main\n");
         iniciaTabelaVariaveis();
     }
-     variaveis 
-    { 
-        // fprintf(yyout, "\tAMEM\t%d\n", contaVar); 
-        
-        // empilha(contaVar);
-    }
-     T_INICIO
+     variaveis T_INICIO
     {
         fprintf(yyout, "main:\tnop\n");
     }
